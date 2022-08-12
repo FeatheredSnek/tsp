@@ -1,0 +1,7 @@
+[gd_resource type="NoiseTexture" load_steps=2 format=2]
+
+[ext_resource path="res://entities/windranger/spell_background/new_opensimplexnoise.tres" type="OpenSimplexNoise" id=1]
+
+[resource]
+seamless = true
+noise = ExtResource( 1 )

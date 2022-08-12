@@ -1,0 +1,147 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://entities/player/jex_sprite_set/jex_wing_right.png" type="Texture" id=1]
+[ext_resource path="res://entities/player/jex_sprite_set/jex_body.png" type="Texture" id=2]
+[ext_resource path="res://entities/player/jex_sprite_set/jex_wing_left.png" type="Texture" id=3]
+[ext_resource path="res://entities/player/jex_sprite_set/jex_hand_left.png" type="Texture" id=4]
+[ext_resource path="res://entities/player/jex_sprite_set/jex_hand_right.png" type="Texture" id=5]
+[ext_resource path="res://entities/player/jex_particle.png" type="Texture" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "default"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("jex_hand_left:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 0.63728, 1.56917, 1 ),
+"update": 0,
+"values": [ 0.0, -10.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("jex_hand_right:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 0.420448, 1, 2 ),
+"update": 0,
+"values": [ 0.0, 12.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("jex_wing_left:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 20.0, -60.0, 20.0, -60.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("jex_wing_right:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -20.0, 60.0, -20.0, 60.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("jex_wing_left:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.4, 0.6, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.75, 0.5 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.75, 0.5 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("jex_wing_right:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.4, 0.6, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.75, 0.5 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.75, 0.5 ) ]
+}
+
+[sub_resource type="Curve" id=2]
+bake_resolution = 32
+_data = [ Vector2( 0, 0.309091 ), 0.0, 3.69091, 0, 0, Vector2( 1, 0 ), -2.99669, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+width = 32
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+trail_divisor = 3
+emission_shape = 1
+emission_sphere_radius = 4.79
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 3 )
+
+[node name="jex" type="Node2D"]
+rotation = -1.5708
+
+[node name="jex_hand_left" type="Sprite" parent="."]
+position = Vector2( 10.1309, -1.07136 )
+rotation = -0.0139828
+texture = ExtResource( 4 )
+offset = Vector2( 1.92303, 6.21201 )
+
+[node name="jex_hand_right" type="Sprite" parent="."]
+position = Vector2( -8.92885, -1.78042 )
+rotation = 0.0479933
+texture = ExtResource( 5 )
+offset = Vector2( -2.33129, 7.09833 )
+
+[node name="jex_body" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="jex_wing_left" type="Sprite" parent="."]
+position = Vector2( 5.87657, -3.55306 )
+rotation = 0.20434
+scale = Vector2( 0.91387, 0.827739 )
+texture = ExtResource( 3 )
+offset = Vector2( 14.8633, -5.66466 )
+
+[node name="jex_wing_right" type="Sprite" parent="."]
+position = Vector2( -5.11378, -4.7939 )
+rotation = -0.20434
+scale = Vector2( 0.91387, 0.827739 )
+texture = ExtResource( 1 )
+offset = Vector2( -14.917, -5.31013 )
+
+[node name="jex_animation" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 1 )
+
+[node name="jex_trail" type="Particles2D" parent="."]
+position = Vector2( 0, -7 )
+amount = 48
+lifetime = 0.2
+fract_delta = false
+local_coords = false
+process_material = SubResource( 4 )
+texture = ExtResource( 6 )

@@ -1,0 +1,244 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://ui/fonts/Poppins-Regular.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/ingame/stage_intro_description_bar.png" type="Texture" id=2]
+[ext_resource path="res://ui/ingame/demo_outro.gd" type="Script" id=3]
+[ext_resource path="res://ui/ingame/stage_intro_name_bar.png" type="Texture" id=4]
+[ext_resource path="res://ui/fonts/spell_name_big.tres" type="DynamicFont" id=5]
+[ext_resource path="res://ui/fonts/stage_description.tres" type="DynamicFont" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 14
+outline_size = 1
+outline_color = Color( 0.701961, 0.968627, 0.67451, 0.270588 )
+use_filter = true
+extra_spacing_bottom = -14
+extra_spacing_char = 3
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+length = 10.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("stage_name_bar:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -530, -0.139, -138.303, 0.139, 138.303, -50, -0.365, -11.122, 0.365, 11.122, 0, -0.295, -11.435, 0.295, 11.435, 400, -0.082, -154.64, 0.082, 154.64 ),
+"times": PoolRealArray( 0.3, 1, 7.3, 7.9 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("stage_name:rect_position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -412, -0.139179, -138.303, 0.139179, 138.303, 68, -0.365218, -11.1215, 0.365218, 11.1215, 118, -0.295411, -11.4348, 0.295411, 11.4348, 518, -0.0822701, -154.64, 0.0822701, 154.64 ),
+"times": PoolRealArray( 0.2, 0.9, 7.4, 8 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("stage_description_bar:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 600, -0.15, 160, 0.15, -160, 50, -0.316, 8.473, 0.316, -8.473, -10, -0.243, 8.707, 0.243, -8.707, -310, -0.086, 124.416, 0.086, -124.416 ),
+"times": PoolRealArray( 0.4, 1.1, 7.3, 7.9 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("stage_description:rect_position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 617.26, -0.15, 160, 0.15, -160, 67.26, -0.316, 8.473, 0.316, -8.473, 17.2605, -0.243, 8.707, 0.243, -8.707, -282.74, -0.086, 124.416, 0.086, -124.416 ),
+"times": PoolRealArray( 0.3, 1, 7.4, 8 )
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 7.6, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 7.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("stage_name_bar:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -520, -0.139, -138.303, 0.139, 138.303, -50, -0.365, -11.122, 0.365, 11.122, 0, -0.295, -11.435, 0.295, 11.435, 400, -0.082, -154.64, 0.082, 154.64 ),
+"times": PoolRealArray( 0.1, 0.8, 2.9, 3.3 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("stage_name:rect_position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -320, -0.139179, -138.303, 0.139179, 138.303, 150, -0.365218, -11.1215, 0.365218, 11.1215, 200, -0.295411, -11.4348, 0.295411, 11.4348, 600, -0.0822701, -154.64, 0.0822701, 154.64 ),
+"times": PoolRealArray( 0, 0.7, 3, 3.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("stage_description_bar:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 600, -0.15, 160, 0.15, -160, 50, -0.316, 8.473, 0.316, -8.473, -10, -0.243, 8.707, 0.243, -8.707, -310, -0.086, 124.416, 0.086, -124.416 ),
+"times": PoolRealArray( 0.1, 0.8, 2.9, 3.3 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("stage_description:rect_position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 617.26, -0.15, 160, 0.15, -160, 67.26, -0.316, 8.473, 0.316, -8.473, 17.2605, -0.243, 8.707, 0.243, -8.707, -282.74, -0.086, 124.416, 0.086, -124.416 ),
+"times": PoolRealArray( 0, 0.7, 3, 3.4 )
+}
+
+[sub_resource type="Animation" id=4]
+length = 7.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("stage_name_bar:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -530, -0.139, -138.303, 0.139, 138.303, -50, -0.365, -11.122, 0.365, 11.122, 0, -0.295, -11.435, 0.295, 11.435, 400, -0.082, -154.64, 0.082, 154.64 ),
+"times": PoolRealArray( 0.3, 1, 6.1, 6.7 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("stage_name:rect_position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( -330, -0.139179, -138.303, 0.139179, 138.303, 150, -0.365218, -11.1215, 0.365218, 11.1215, 200, -0.295411, -11.4348, 0.295411, 11.4348, 600, -0.0822701, -154.64, 0.0822701, 154.64 ),
+"times": PoolRealArray( 0.2, 0.9, 6.2, 6.8 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("stage_description_bar:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 600, -0.15, 160, 0.15, -160, 50, -0.316, 8.473, 0.316, -8.473, -10, -0.243, 8.707, 0.243, -8.707, -310, -0.086, 124.416, 0.086, -124.416 ),
+"times": PoolRealArray( 0.4, 1.1, 6.1, 6.7 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("stage_description:rect_position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 617.26, -0.15, 160, 0.15, -160, 67.26, -0.316, 8.473, 0.316, -8.473, 17.2605, -0.243, 8.707, 0.243, -8.707, -282.74, -0.086, 124.416, 0.086, -124.416 ),
+"times": PoolRealArray( 0.3, 1, 6.2, 6.8 )
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 6.4, 6.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="stage_intro" type="Node2D"]
+modulate = Color( 1, 1, 1, 0 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_vertical_guides_": [ 470.265, 0.0626221, 535.245, -64.9174 ]
+}
+
+[node name="stage_name_bar" type="Sprite" parent="."]
+position = Vector2( -530, 23.0471 )
+scale = Vector2( 1, 1.0721 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="stage_description_bar" type="Sprite" parent="."]
+position = Vector2( 600, 103.86 )
+scale = Vector2( 1, 0.65867 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="stage_name" type="Label" parent="."]
+margin_left = -412.0
+margin_right = -82.9999
+margin_bottom = 51.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.701961, 0.968627, 0.67451, 0.784314 )
+text = "DEMO FINISHED"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="stage_score" type="Label" parent="stage_name"]
+margin_top = 50.0
+margin_right = 329.0
+margin_bottom = 69.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.701961, 0.968627, 0.67451, 0.784314 )
+text = "FINAL SCORE"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="stage_score_value" type="Label" parent="stage_name"]
+margin_top = 69.0
+margin_right = 329.0
+margin_bottom = 88.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.701961, 0.968627, 0.67451, 0.784314 )
+text = "999999999"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="stage_description" type="Label" parent="."]
+margin_left = 617.26
+margin_top = 107.392
+margin_right = 887.26
+margin_bottom = 239.392
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.701961, 0.968627, 0.996078, 0.796078 )
+text = "You have finished the demo version of The Sunbreeze Project: Lily of Dereliction. Thank you for playing!"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="intro_animation" type="AnimationPlayer" parent="."]
+autoplay = "demo_outro"
+anims/demo_outro = SubResource( 2 )
+anims/intro = SubResource( 3 )
+"anims/intro shifted" = SubResource( 4 )

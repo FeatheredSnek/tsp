@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://entities/bullets/bullet_arrow_32/bullet_arrow_32_sprite.png" type="Texture" id=1]
+[ext_resource path="res://entities/bullets/bullet_arrow_32/bullet_arrow_32.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.0
+
+[node name="bullet_arrow" type="Area2D"]
+monitoring = false
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="bullet_sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 64 )
+
+[node name="bullet_VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -20, -36, 40, 72 )
+
+[node name="bullet_collision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -10 )
+z_index = 4
+shape = SubResource( 1 )
+[connection signal="viewport_exited" from="bullet_VisibilityNotifier2D" to="." method="_on_bullet_VisibilityNotifier2D_viewport_exited"]

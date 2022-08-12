@@ -1,0 +1,153 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://entities/creeps/meele_spriteset.png" type="Texture" id=1]
+[ext_resource path="res://entities/creeps/creep_standard.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 50, 50 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 50, 0, 50, 50 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 100, 0, 50, 50 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 100, 50, 50 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 50, 100, 50, 50 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 100, 100, 50, 50 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 100, 50, 50, 50 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 50, 50, 50, 50 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 50, 50, 50 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 50, 50, 50 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 50, 50, 50, 50 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 100, 50, 50, 50 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 50, 50, 50, 50 )
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "move",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "turn_into_idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": false,
+"name": "turn_into_move",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ) ],
+"loop": true,
+"name": "smolturn",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=15]
+radius = 20.0
+
+[sub_resource type="Animation" id=16]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("creep_sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 0.732043, 0.68302, 1.41421 ),
+"update": 0,
+"values": [ Vector2( 0, -1 ), Vector2( 0, 1 ), Vector2( 0, -1 ) ]
+}
+
+[node name="creep_meele_standard" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource( 2 )
+creep_score = 10000
+
+[node name="creep_visibility_notifier" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -30, -30 )
+z_index = 1
+z_as_relative = false
+rect = Rect2( 0, 0, 60, 60 )
+
+[node name="creep_sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -0.248483 )
+frames = SubResource( 14 )
+animation = "idle"
+frame = 2
+playing = true
+
+[node name="creep_hitbox_shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 15 )
+
+[node name="creep_movement_tween" type="Tween" parent="."]
+playback_process_mode = 0
+
+[node name="creep_movement_timer" type="Timer" parent="."]
+
+[node name="creep_attack_timer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[node name="movement_animation" type="AnimationPlayer" parent="."]
+autoplay = "creep_idle_move"
+anims/creep_idle_move = SubResource( 16 )
+[connection signal="area_entered" from="." to="." method="_on_creep_area_entered"]
+[connection signal="viewport_exited" from="creep_visibility_notifier" to="." method="_on_creep_visibility_notifier_viewport_exited"]
+[connection signal="tween_all_completed" from="creep_movement_tween" to="." method="_on_creep_movement_tween_tween_all_completed"]

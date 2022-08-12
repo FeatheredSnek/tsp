@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://vfx/powershot_wind_particle.png" type="Texture" id=1]
+[ext_resource path="res://particle_selfdelete.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=1]
+min_value = -360.0
+max_value = 1000.0
+_data = [ Vector2( 0, 1000 ), 0.0, 0.0, 0, 0, Vector2( 1, -6.8916 ), -1469.51, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.232432, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.0588235, 1, 1, 1, 0.129412, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+width = 32
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 0.540799 ), 0.0, 2.36364, 0, 0, Vector2( 0.802885, 0.0662719 ), -3.30909, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+width = 32
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 32.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 22.0
+initial_velocity_random = 0.3
+angular_velocity = 999.0
+angular_velocity_random = 0.4
+angular_velocity_curve = SubResource( 2 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 11.0
+angle = 180.0
+angle_random = 1.0
+scale_random = 0.7
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
+
+[node name="wind_particle" type="Particles2D"]
+emitting = false
+amount = 1
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.95
+process_material = SubResource( 7 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

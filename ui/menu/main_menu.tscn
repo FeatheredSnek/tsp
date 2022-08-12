@@ -1,0 +1,502 @@
+[gd_scene load_steps=38 format=2]
+
+[ext_resource path="res://ui/menu/main_menu_bg.png" type="Texture" id=1]
+[ext_resource path="res://ui/menu/main_menu.gd" type="Script" id=2]
+[ext_resource path="res://ui/menu/main_menu_logo.png" type="Texture" id=3]
+[ext_resource path="res://ui/menu/main_menu_willow.png" type="Texture" id=4]
+[ext_resource path="res://ui/menu/main_menu_lily.png" type="Texture" id=5]
+[ext_resource path="res://ui/fonts/main_menu_font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://ui/menu/main_menu_smoke.png" type="Texture" id=7]
+[ext_resource path="res://ui/menu/main_menu_willow_highlight_bw.png" type="Texture" id=8]
+[ext_resource path="res://ui/menu/lighten_noise.tres" type="Texture" id=9]
+[ext_resource path="res://ui/menu/main_menu_lily_radial_glow.png" type="Texture" id=10]
+[ext_resource path="res://ui/menu/main_menu_demo.png" type="Texture" id=11]
+[ext_resource path="res://ui/menu/main_menu_options_bg.png" type="Texture" id=12]
+[ext_resource path="res://ui/menu/modal_options.gd" type="Script" id=13]
+[ext_resource path="res://ui/menu/modal_info.gd" type="Script" id=14]
+[ext_resource path="res://sound/ui_back.wav" type="AudioStream" id=15]
+[ext_resource path="res://sound/ui_accept.wav" type="AudioStream" id=16]
+[ext_resource path="res://sound/ui_select.wav" type="AudioStream" id=17]
+[ext_resource path="res://bgm/looped/bgm01_start.ogg" type="AudioStream" id=18]
+[ext_resource path="res://bgm/looped/bgm01_loop.ogg" type="AudioStream" id=19]
+[ext_resource path="res://ui/menu/main_menu_info.png" type="Texture" id=20]
+[ext_resource path="res://vfx/vfx_loader.tscn" type="PackedScene" id=21]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D noisetex;
+
+vec4 softlight(vec4 input_a, vec4 input_b, float intensity) {
+	//(1-2b)a^2 + 2ba
+	input_b *= intensity;
+	float mix_r = (1.0 - 2.0 * input_b.r) * pow(input_a.r, 2.0) + 2.0 * input_a.r * input_b.r;
+	float mix_g = (1.0 - 2.0 * input_b.g) * pow(input_a.g, 2.0) + 2.0 * input_a.g * input_b.g;
+	float mix_b = (1.0 - 2.0 * input_b.b) * pow(input_a.b, 2.0) + 2.0 * input_a.b * input_b.b;
+	vec4 output = vec4(mix_r, mix_g, mix_b, 1.0);
+	return output;
+	}
+
+void fragment() {
+	vec4 noise_value = texture(noisetex, vec2((UV.x - (0.1 * TIME)) * 0.5, UV.y));
+	vec4 texture_value = texture(TEXTURE, UV);
+	vec4 mixed = softlight(texture_value, noise_value, 0.8);
+	COLOR = mixed;
+	
+	}"
+
+[sub_resource type="OpenSimplexNoise" id=2]
+octaves = 2
+
+[sub_resource type="NoiseTexture" id=3]
+width = 400
+height = 400
+seamless = true
+noise = SubResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 1 )
+shader_param/noisetex = SubResource( 3 )
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform sampler2D lighttex;
+uniform sampler2D noisetex;
+
+void fragment() {
+	vec4 light_value = texture(lighttex, UV);
+	vec4 image_value = texture(TEXTURE, UV);
+	vec4 noise_value = texture(noisetex, vec2(0.5 * TIME, 0.5));
+	float intensity = noise_value.r;
+	vec4 mixed = vec4(image_value.rgb + light_value.rgb * intensity, image_value.a);
+	COLOR = mixed;
+	}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/lighttex = ExtResource( 8 )
+shader_param/noisetex = ExtResource( 9 )
+
+[sub_resource type="Gradient" id=7]
+offsets = PoolRealArray( 0, 0.178378, 0.589189, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+width = 32
+
+[sub_resource type="ParticlesMaterial" id=9]
+emission_shape = 1
+emission_sphere_radius = 66.0
+flag_disable_z = true
+gravity = Vector3( 0, -30, 0 )
+angular_velocity = 40.0
+angular_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 90.0
+angle_random = 1.0
+color_ramp = SubResource( 8 )
+
+[sub_resource type="Shader" id=10]
+code = "shader_type canvas_item;
+
+uniform sampler2D noisetex;
+
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	vec4 noise_value = texture(noisetex, vec2(0.5 * TIME, 0.5));
+	float intensity = pow(noise_value.r, 2.0) * 2.0; //noise_value.r * 3.0;
+	COLOR = vec4(color.rgb, color.a * intensity);
+	}
+
+void vertex() {
+	vec4 noise_value = texture(noisetex, vec2(0.5 * TIME, 0.5));
+	float intensity = noise_value.r * 0.1;
+	VERTEX = VERTEX + intensity * vec2(VERTEX.x, VERTEX.y);
+	}"
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
+shader_param/noisetex = ExtResource( 9 )
+
+[sub_resource type="Animation" id=12]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("loading_label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.466667, 0.466667, 0.466667, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "info_show"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("modal_info:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("modal_info:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.02 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "loading_show"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("modal_loading:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("modal_loading:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "options_show"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("modal_options:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.03 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("modal_options:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "fade"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="main_menu" type="TextureRect"]
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="menu_cont" type="ColorRect" parent="."]
+margin_left = 56.0
+margin_top = 425.0
+margin_right = 336.0
+margin_bottom = 725.0
+color = Color( 0, 0, 0, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="start" type="Label" parent="menu_cont"]
+modulate = Color( 0.466667, 0.466667, 0.466667, 1 )
+anchor_top = -0.00221141
+anchor_bottom = -0.00221141
+margin_left = 72.0799
+margin_top = 22.2577
+margin_right = 212.08
+margin_bottom = 78.2577
+custom_fonts/font = ExtResource( 6 )
+text = "START"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="info" type="Label" parent="menu_cont"]
+modulate = Color( 0.5, 0.5, 0.5, 1 )
+margin_left = 72.0799
+margin_top = 87.0664
+margin_right = 212.08
+margin_bottom = 143.066
+custom_fonts/font = ExtResource( 6 )
+text = "INFO"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="options" type="Label" parent="menu_cont"]
+modulate = Color( 0.466667, 0.466667, 0.466667, 1 )
+margin_left = 40.7209
+margin_top = 152.293
+margin_right = 236.721
+margin_bottom = 208.293
+custom_fonts/font = ExtResource( 6 )
+text = "OPTIONS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="exit" type="Label" parent="menu_cont"]
+modulate = Color( 0.466667, 0.466667, 0.466667, 1 )
+margin_left = 40.7209
+margin_top = 216.266
+margin_right = 236.721
+margin_bottom = 272.266
+custom_fonts/font = ExtResource( 6 )
+text = "EXIT"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="logo_cont" type="ColorRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 484.0
+margin_top = 18.0
+margin_right = 1014.0
+margin_bottom = 173.0
+color = Color( 0, 0, 0, 0.59 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="logo" type="Sprite" parent="logo_cont"]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="mireska" type="Sprite" parent="."]
+material = SubResource( 6 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="DEMO" type="Sprite" parent="."]
+position = Vector2( 870.229, 159.2 )
+texture = ExtResource( 11 )
+
+[node name="lily_particles" type="Particles2D" parent="."]
+modulate = Color( 1, 1, 1, 0.615686 )
+position = Vector2( 189.273, 205.3 )
+amount = 24
+lifetime = 3.0
+visibility_rect = Rect2( -100, -200, 200, 300 )
+process_material = SubResource( 9 )
+texture = ExtResource( 7 )
+
+[node name="lily_glow" type="Sprite" parent="."]
+material = SubResource( 11 )
+position = Vector2( 186.705, 191.299 )
+scale = Vector2( 1.0462, 1.0462 )
+texture = ExtResource( 10 )
+
+[node name="lily" type="Sprite" parent="."]
+position = Vector2( 181.705, 190.299 )
+texture = ExtResource( 5 )
+
+[node name="modals" type="CenterContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 768.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="modal_options" type="TextureRect" parent="modals"]
+visible = false
+margin_left = 292.0
+margin_top = 77.0
+margin_right = 732.0
+margin_bottom = 690.0
+texture = ExtResource( 12 )
+script = ExtResource( 13 )
+
+[node name="op_difficulty" type="Label" parent="modals/modal_options"]
+margin_left = 156.75
+margin_top = 81.3
+margin_right = 343.75
+margin_bottom = 137.3
+custom_fonts/font = ExtResource( 6 )
+text = "NORMAL"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="op_lives" type="Label" parent="modals/modal_options"]
+margin_left = 156.75
+margin_top = 183.9
+margin_right = 343.75
+margin_bottom = 239.9
+custom_fonts/font = ExtResource( 6 )
+text = "3"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="op_bombs" type="Label" parent="modals/modal_options"]
+margin_left = 156.75
+margin_top = 293.15
+margin_right = 343.75
+margin_bottom = 349.15
+custom_fonts/font = ExtResource( 6 )
+text = "3"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="op_music" type="Label" parent="modals/modal_options"]
+margin_left = 156.75
+margin_top = 402.4
+margin_right = 343.75
+margin_bottom = 458.4
+custom_fonts/font = ExtResource( 6 )
+text = "ON"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="op_fullscreen" type="Label" parent="modals/modal_options"]
+margin_left = 156.75
+margin_top = 509.4
+margin_right = 343.75
+margin_bottom = 565.4
+custom_fonts/font = ExtResource( 6 )
+text = "OFF"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="modal_info" type="TextureRect" parent="modals"]
+visible = false
+margin_left = 102.0
+margin_top = 77.0
+margin_right = 922.0
+margin_bottom = 691.0
+texture = ExtResource( 20 )
+script = ExtResource( 14 )
+
+[node name="modal_loading" type="ColorRect" parent="modals"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 312.0
+margin_top = 334.0
+margin_right = 712.0
+margin_bottom = 434.0
+rect_min_size = Vector2( 400, 100 )
+color = Color( 0, 0, 0, 0.784314 )
+
+[node name="loading_label" type="Label" parent="modals/modal_loading"]
+margin_right = 400.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 400, 100 )
+custom_fonts/font = ExtResource( 6 )
+text = "LOADING..."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="loading_animation" type="AnimationPlayer" parent="modals/modal_loading"]
+autoplay = "loading_marquee"
+anims/loading_marquee = SubResource( 12 )
+
+[node name="modal_animations" type="AnimationPlayer" parent="modals"]
+anims/info_show = SubResource( 13 )
+anims/loading_show = SubResource( 14 )
+anims/options_show = SubResource( 15 )
+
+[node name="transition_animation" type="AnimationPlayer" parent="."]
+autoplay = "fade"
+anims/fade = SubResource( 16 )
+
+[node name="sfx_ui_select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+bus = "UI"
+
+[node name="sfx_ui_accept" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+bus = "UI"
+
+[node name="sfx_ui_back" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+bus = "UI"
+
+[node name="bgm_menu_start" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+bus = "Music"
+
+[node name="bgm_menu_loop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+bus = "Music"
+
+[node name="vfx_loader" parent="." instance=ExtResource( 21 )]
+position = Vector2( 1600, 350 )
+[connection signal="toggle_menu_music" from="modals/modal_options" to="." method="_on_modal_options_toggle_menu_music"]
+[connection signal="finished" from="bgm_menu_start" to="." method="_on_bgm_menu_start_finished"]

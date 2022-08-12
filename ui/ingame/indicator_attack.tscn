@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/stylebox_bar_bg.tres" type="StyleBox" id=1]
+[ext_resource path="res://ui/stylebox_attack.tres" type="StyleBox" id=2]
+
+[node name="indicator_attack" type="ProgressBar"]
+margin_right = 4.0
+margin_bottom = 4.0
+custom_styles/fg = ExtResource( 2 )
+custom_styles/bg = ExtResource( 1 )
+min_value = 1.0
+max_value = 100.0
+step = 1.0
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,0 +1,50 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://vfx/ring_normal_rg.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D normal_ring_texture;
+uniform vec2 node_position = vec2(0.0,0.0);
+uniform float scale_factor = 1.0;
+uniform float effect_strenght = 1.0;
+
+vec2 position_corrected(float scale, vec2 init_position) {
+	vec2 corrected_position = init_position ; 
+	return corrected_position;
+}
+
+vec2 position_to_uv(vec2 node_pos, vec2 scl) {
+	vec2 pos_normalized = vec2((node_pos.x-300.0) / 600.0, ((node_pos.y-360.0) / 720.0));
+	vec2 pos_corrected = pos_normalized + 0.5 * abs(1.0 - scale_factor);
+	vec2 uv = (pos_corrected) * -1.0;
+	return uv;
+}
+
+vec2 aspect_corrected(vec2 uv) {
+	vec2 uv_corrected = uv * vec2(1.0,1.2) + vec2(0,-0.1);
+	return uv_corrected;
+}
+
+vec4 fakefog(vec4 color, float dist, float intensity) {
+	vec3 fog_color = vec3(0.02, 0.07, 0.2);
+	vec4 fogged = vec4(color.rgb + fog_color*intensity*(1.0-dist), color.a);
+	return fogged;
+}
+
+void fragment() {
+	vec2 normal_map_scale = vec2(scale_factor, scale_factor);
+	vec2 normal_offset = texture(normal_ring_texture, aspect_corrected((vec2(UV) + position_to_uv(node_position, normal_map_scale)) * (1.0/normal_map_scale))).rg;
+	normal_offset = normal_offset * 2.0 - 1.0;
+	normal_offset *= 0.5 * effect_strenght;
+	vec4 c = texture(TEXTURE, UV + normal_offset);
+	COLOR = fakefog(c, UV.y, 1.0);
+} "
+
+[resource]
+shader = SubResource( 1 )
+shader_param/node_position = Vector2( 0, 0 )
+shader_param/scale_factor = 1.0
+shader_param/effect_strenght = 0.0
+shader_param/normal_ring_texture = ExtResource( 1 )

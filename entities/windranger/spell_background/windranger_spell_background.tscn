@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://entities/windranger/spell_background/bg_leaves.png" type="Texture" id=1]
+[ext_resource path="res://entities/windranger/spell_background/bg_leaves.shader" type="Shader" id=3]
+[ext_resource path="res://entities/windranger/spell_background/windranger_spell_background.gd" type="Script" id=4]
+[ext_resource path="res://entities/windranger/spell_background/leaves_noise.tres" type="Texture" id=5]
+[ext_resource path="res://entities/windranger/spell_background/bg_arrows_124.png" type="Texture" id=6]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+void fragment() {
+	vec4 col = texture(TEXTURE, vec2(UV.x+0.4*TIME, UV.y));
+	COLOR = vec4(col.r*0.8, col.g*1.5, 0.0, col.a*0.3);
+	}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 3 )
+shader_param/noisetex = ExtResource( 5 )
+
+[node name="windranger_spell_background" type="Node2D"]
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 0.0, 720.0 ],
+"_edit_vertical_guides_": [ 0.0, 600.0 ]
+}
+
+[node name="background_color" type="ColorRect" parent="."]
+margin_left = -300.0
+margin_top = -360.0
+margin_right = 300.0
+margin_bottom = 360.0
+color = Color( 0.0823529, 0.117647, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background_arrows" type="TextureRect" parent="."]
+material = SubResource( 2 )
+margin_left = -458.744
+margin_top = -344.652
+margin_right = 302.256
+margin_bottom = 524.348
+rect_rotation = -12.0
+texture = ExtResource( 6 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="leaves" type="Sprite" parent="."]
+modulate = Color( 0.7, 0.7, 0.7, 1 )
+material = SubResource( 3 )
+texture = ExtResource( 1 )

@@ -1,0 +1,62 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float blurSize = 0.0022;
+uniform float intensity = 0.0;
+uniform bool effect_on = false;
+
+void fragment() {
+	if (effect_on) {
+		vec4 sum = vec4(0.0);
+		int i;
+		int j;
+		//x
+		sum += texture(TEXTURE, vec2(UV.x - 4.0*blurSize, UV.y)) * 0.05;
+		sum += texture(TEXTURE, vec2(UV.x - 3.0*blurSize, UV.y)) * 0.09;
+		sum += texture(TEXTURE, vec2(UV.x - 2.0*blurSize, UV.y)) * 0.12;
+		sum += texture(TEXTURE, vec2(UV.x - blurSize, UV.y)) * 0.15;
+		sum += texture(TEXTURE, vec2(UV.x, UV.y)) * 0.16;
+		sum += texture(TEXTURE, vec2(UV.x + blurSize, UV.y)) * 0.15;
+		sum += texture(TEXTURE, vec2(UV.x + 2.0*blurSize, UV.y)) * 0.12;
+		sum += texture(TEXTURE, vec2(UV.x + 3.0*blurSize, UV.y)) * 0.09;
+		sum += texture(TEXTURE, vec2(UV.x + 4.0*blurSize, UV.y)) * 0.05;
+		//y
+		sum += texture(TEXTURE, vec2(UV.x, UV.y - 4.0*blurSize)) * 0.05;
+		sum += texture(TEXTURE, vec2(UV.x, UV.y - 3.0*blurSize)) * 0.09;
+		sum += texture(TEXTURE, vec2(UV.x, UV.y - 2.0*blurSize)) * 0.12;
+		sum += texture(TEXTURE, vec2(UV.x, UV.y - blurSize)) * 0.15;
+		sum += texture(TEXTURE, vec2(UV.x, UV.y)) * 0.16;
+		sum += texture(TEXTURE, vec2(UV.x, UV.y + blurSize)) * 0.15;
+		sum += texture(TEXTURE, vec2(UV.x, UV.y + 2.0*blurSize)) * 0.12;
+		sum += texture(TEXTURE, vec2(UV.x, UV.y + 3.0*blurSize)) * 0.09;
+		sum += texture(TEXTURE, vec2(UV.x, UV.y + 4.0*blurSize)) * 0.05;
+
+//	sum += texture(TEXTURE, vec2(UV.x, UV.y)) * 0.20;
+//	sum += texture(TEXTURE, vec2(UV.x + blurSize, UV.y)) * 0.11;
+//	sum += texture(TEXTURE, vec2(UV.x - blurSize, UV.y)) * 0.11;
+//	sum += texture(TEXTURE, vec2(UV.x, UV.y + blurSize)) * 0.11;
+//	sum += texture(TEXTURE, vec2(UV.x, UV.y - blurSize)) * 0.11;
+//	sum += texture(TEXTURE, vec2(UV.x + blurSize, UV.y + blurSize)) * 0.07;
+//	sum += texture(TEXTURE, vec2(UV.x + blurSize, UV.y - blurSize)) * 0.07;
+//	sum += texture(TEXTURE, vec2(UV.x - blurSize, UV.y + blurSize)) * 0.07;
+//	sum += texture(TEXTURE, vec2(UV.x - blurSize, UV.y - blurSize)) * 0.07;
+//	sum += texture(TEXTURE, vec2(UV.x + 2.0*blurSize, UV.y)) * 0.02;
+//	sum += texture(TEXTURE, vec2(UV.x - 2.0*blurSize, UV.y)) * 0.02;
+//	sum += texture(TEXTURE, vec2(UV.x, UV.y + 2.0*blurSize)) * 0.02;
+//	sum += texture(TEXTURE, vec2(UV.x, UV.y - 2.0*blurSize)) * 0.02;
+	
+		vec4 c = sum * intensity + vec4(texture(TEXTURE, UV).rgb, 1.0);
+		COLOR = vec4(c.rgb, 1.0);
+		}
+	else {
+		COLOR = texture(TEXTURE, UV)
+		}
+	}"
+
+[resource]
+shader = SubResource( 1 )
+shader_param/blurSize = 0.006
+shader_param/intensity = 0.0
+shader_param/effect_on = false

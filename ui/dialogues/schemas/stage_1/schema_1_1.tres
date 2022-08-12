@@ -1,0 +1,67 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://ui/dialogues/schemas/stage_1/wr-arrow.png" type="Texture" id=1]
+[ext_resource path="res://ui/dialogues/schemas/stage_1/mireska-point.png" type="Texture" id=2]
+[ext_resource path="res://ui/dialogues/schemas/stage_1/wr-hey.png" type="Texture" id=3]
+[ext_resource path="res://ui/dialogues/schemas/stage_1/wr-cross.png" type="Texture" id=4]
+[ext_resource path="res://ui/dialogues/schemas/stage_1/mireska-shrug.png" type="Texture" id=5]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Resource
+
+export(String) var start_from = \"left\"
+
+export var schemadata = [
+		{
+			\"txt\" : \"text\",
+			\"img\" : ImageTexture
+		},
+		{
+			\"txt\" : \"text\",
+			\"img\" : ImageTexture
+		},
+		{
+			\"txt\" : \"text\",
+			\"img\" : ImageTexture
+		},
+		{
+			\"txt\" : \"text\",
+			\"img\" : ImageTexture
+		},
+		{
+			\"txt\" : \"text\",
+			\"img\" : ImageTexture
+		}
+	]
+
+var dialogue_count
+
+func _init():
+	dialogue_count = schemadata.size()
+"
+
+[resource]
+resource_name = "dialogue_schema_test"
+script = SubResource( 1 )
+start_from = "left"
+schemadata = [ {
+"img": ExtResource( 3 ),
+"pos": "top",
+"txt": "Hello there, Mireska! Taking a stroll in these ancient woods? Who would have thought that you’re such a nature person, right?"
+}, {
+"img": ExtResource( 5 ),
+"pos": "bot",
+"txt": "Oh, some people seem to like the solitude of Middelaine – but absolutely, I’m here for the nature. Y’know, breathing fresh air, listening to birdsongs, picking flowers."
+}, {
+"img": ExtResource( 4 ),
+"pos": "top",
+"txt": "Mhm, no doubt about that. But you could as well admire birds and bees elsewhere. I’m not letting you into to the river, sis. They’ve warned me beforehand."
+}, {
+"img": ExtResource( 2 ),
+"pos": "bot",
+"txt": "Predictably! So the eyes of a ranger are upon me? Are you going to teach me the truth about right and wrong? Jex here thinks you’re no fun."
+}, {
+"img": ExtResource( 1 ),
+"pos": "top",
+"txt": "Well, no ethics classes here, no. I’ll simply force you to leave, right, wrong, alive, dead, whatever suits you!"
+} ]

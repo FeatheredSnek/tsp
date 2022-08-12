@@ -1,0 +1,1639 @@
+[gd_scene load_steps=82 format=2]
+
+[ext_resource path="res://entities/player/player_hitbox_sprite.png" type="Texture" id=2]
+[ext_resource path="res://entities/player/player.gd" type="Script" id=3]
+[ext_resource path="res://entities/player/jex_sprite.png" type="Texture" id=4]
+[ext_resource path="res://entities/player/bomb_position.gd" type="Script" id=5]
+[ext_resource path="res://entities/player/willow_sprite_set/willow_sprite_wing_right_small.png" type="Texture" id=6]
+[ext_resource path="res://entities/player/willow_sprite_set/willow_sprite_flap_left.png" type="Texture" id=7]
+[ext_resource path="res://entities/player/willow_sprite_set/willow_sprite_wing_left_big.png" type="Texture" id=8]
+[ext_resource path="res://entities/player/willow_sprite_set/willow_sprite_legs.png" type="Texture" id=9]
+[ext_resource path="res://entities/player/willow_sprite_set/willow_sprite_hand_right_lower.png" type="Texture" id=10]
+[ext_resource path="res://entities/player/willow_sprite_set/willow_sprite_body.png" type="Texture" id=11]
+[ext_resource path="res://entities/player/willow_sprite_set/willow_sprite_head.png" type="Texture" id=12]
+[ext_resource path="res://entities/player/willow_sprite_set/willow_sprite_flap_right.png" type="Texture" id=13]
+[ext_resource path="res://entities/player/willow_sprite_set/willow_sprite_hand_left.png" type="Texture" id=14]
+[ext_resource path="res://entities/player/willow_sprite_set/willow_sprite_lamp.png" type="Texture" id=15]
+[ext_resource path="res://entities/player/willow_sprite_set/willow_sprite_hand_right_upper.png" type="Texture" id=16]
+[ext_resource path="res://entities/player/willow_sprite_set/willow_sprite_wing_left_small.png" type="Texture" id=17]
+[ext_resource path="res://entities/player/willow_sprite_set/willow_sprite_wing_right_big.png" type="Texture" id=18]
+[ext_resource path="res://entities/player/seal_1.png" type="Texture" id=19]
+[ext_resource path="res://entities/player/seal_shadow.png" type="Texture" id=20]
+[ext_resource path="res://entities/player/shadowrealm_particle_cyan.png" type="Texture" id=21]
+[ext_resource path="res://entities/player/shadowrealm_particle_pink.png" type="Texture" id=22]
+[ext_resource path="res://entities/player/shadow_enter_explode_spriteset.png" type="Texture" id=23]
+[ext_resource path="res://entities/player/shadow_exit_explode_spriteset.png" type="Texture" id=24]
+[ext_resource path="res://entities/player/jex.tscn" type="PackedScene" id=25]
+[ext_resource path="res://entities/player/jex_appear_spriteset.png" type="Texture" id=26]
+[ext_resource path="res://entities/player/smoke_particle.png" type="Texture" id=27]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 300.0
+
+[sub_resource type="Curve2D" id=5]
+_data = {
+"points": PoolVector2Array( 34.7356, 21.6429, -34.7356, -21.6429, -21.3405, 17.7337, -18.4046, 41.8075, 18.4046, -41.8075, -70.9431, -69.6009, -14.4286, 0, 14.4286, 0, -0.872452, -109.802, -12.5582, -14.1614, 12.5582, 14.1614, 64.7221, -84.8632, -5.34393, -18.4366, 5.34393, 18.4366, 110.014, -29.9098, 5.34393, -11.4895, -5.34393, 11.4895, 101.182, 49.9541, 13.3598, -9.35188, -13.3598, 9.35188, 69.4003, 102.085, 21.6429, 0.534393, -21.6429, -0.534393, 1.97696, 122.45, 16.299, 10.9551, -16.299, -10.9551, -67.1372, 102.887, 4.80954, 19.5054, -4.80954, -19.5054, -109.099, 42.323, -3.74075, 25.1165, 3.74075, -25.1165, -111.492, -24.2987, -16.5662, 13.8942, 16.5662, -13.8942, -77.3024, -81.4716, -17.635, 0.267197, 17.635, -0.267197, -0.338058, -113.81, -14.4286, -11.4895, 14.4286, 11.4895, 70.6575, -82.7434, -3.20636, -17.1006, 3.20636, 17.1006, 112.686, -30.4442, 5.87833, -12.0239, -5.87833, 12.0239, 102.454, 52.4978, 12.5582, -9.88628, -12.5582, 9.88628, 71.8051, 102.887, 20.5741, -0.267197, -20.5741, 0.267197, 2.40088, 121.178, 14.4286, 13.0926, -14.4286, -13.0926, -70.0764, 102.887, -20.1075, 23.5454, 20.1075, -23.5454, -78.9982, 31.3002, -22.7117, -5.61113, 22.7117, 5.61113, -19.6447, 18.5816 )
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "attack_start"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("willow_sprite_hand_right_upper:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -160.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("willow_sprite_hand_right_upper/willow_sprite_hand_right_lower:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0, -10.0 ]
+}
+
+[sub_resource type="Animation" id=7]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("willow_sprite_wing_left_big:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 0.435275, 1 ),
+"update": 0,
+"values": [ 0.0, -36.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("willow_sprite_wing_right_big:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 0.450625, 1 ),
+"update": 0,
+"values": [ 0.0, 36.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("willow_sprite_wing_left_small:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.5, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -20.0, 0.0, -7.35384 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("willow_sprite_wing_right_small:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.5, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 20.0, 0.0, 7.35384 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("willow_sprite_wing_right_small:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.2, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.1 ), Vector2( 1, 1.0171 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("willow_sprite_wing_left_big:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 1.2 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("willow_sprite_wing_right_big:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 1.2 ), Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("willow_sprite_wing_left_small:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.2, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.1 ), Vector2( 1, 1.0171 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("willow_sprite_flap_left:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 7.0, 12.0, 8.0, 7.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("willow_sprite_flap_right:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -7.0, -8.0, -11.0, -7.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("willow_sprite_legs:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, -1.0, 0.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("willow_sprite_hand_left:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 8.0, 6.0, 8.0 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("willow_sprite_head:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("willow_sprite_head:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.4104, -13.0325 ), Vector2( 0.41, -12.9 ), Vector2( 0.4104, -13.0325 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("willow_sprite_hand_left/willow_sprite_lamp:rotation_degrees")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=8]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("willow_sprite_wing_left_big:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 30.0, -10.0, 15.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("willow_sprite_wing_right_big:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -30.0, 10.0, -15.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("willow_sprite_wing_left_small:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -10.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("willow_sprite_wing_right_small:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 10.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("willow_sprite_wing_right_small:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("willow_sprite_wing_left_big:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.6, 1.1 ), Vector2( 1, 1 ), Vector2( 0.8, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("willow_sprite_wing_right_big:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.6, 1.1 ), Vector2( 1, 1 ), Vector2( 0.8, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("willow_sprite_wing_left_small:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 1 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("willow_sprite_flap_left:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -10.0, -12.0, -7.0, -10.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("willow_sprite_flap_right:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.4, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 10.0, 8.0, 11.0, 10.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("willow_sprite_legs:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0, -1.0, 0.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("willow_sprite_hand_left:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -10.0, -7.0, -10.0 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("willow_sprite_head:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("willow_sprite_head:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.4104, -13.0325 ), Vector2( 0.41, -12.9 ), Vector2( 0.4104, -13.0325 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("willow_sprite_hand_left/willow_sprite_lamp:rotation_degrees")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -5.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("willow_sprite_hand_left:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 1, 2 ),
+"transitions": PoolRealArray( 1, 0.68302, 1 ),
+"update": 0,
+"values": [ 0.0, 4.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("willow_sprite_hand_left/willow_sprite_lamp:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1.18921, 1.51572, 1 ),
+"update": 0,
+"values": [ 0.0, -8.0, 0.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("willow_sprite_flap_right:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 0.63728, 1.27456 ),
+"update": 0,
+"values": [ 0.0, 3.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("willow_sprite_flap_left:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 1.2, 2 ),
+"transitions": PoolRealArray( 1, 0.574349, 1 ),
+"update": 0,
+"values": [ 0.0, -2.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("willow_sprite_wing_left_big:rotation_degrees")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6, 0.7, 0.8, 0.9, 1.1, 1.3, 2 ),
+"transitions": PoolRealArray( 1, 0.732043, 1, 1.31951, 0.732043, 1, 1, 0.732043, 1.18921 ),
+"update": 0,
+"values": [ 0.0, -3.0, 30.0, -25.0, -3.0, 30.0, -35.0, 5.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("willow_sprite_wing_left_small:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5, 0.7, 1.1, 1.4, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 3.0, 15.0, -10.0, 0.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("willow_sprite_wing_right_big:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6, 0.7, 0.8, 0.9, 1.1, 1.3, 2 ),
+"transitions": PoolRealArray( 1, 0.707107, 1, 1.23115, 0.707107, 1, 1.10957, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 3.0, -30.0, 25.0, 4.0, -30.0, 40.0, -4.0, 0.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("willow_sprite_wing_right_small:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.5, 0.7, 1.1, 1.4, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 2.0, -17.0, 11.0, 0.0, 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("willow_sprite_head:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("willow_sprite_head:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.4104, -13.0325 ), Vector2( 0.41, -12.4 ), Vector2( 0.4104, -13.0325 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("willow_sprite_legs:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("willow_sprite_wing_left_big:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6, 0.7, 0.8, 0.9, 1.1, 1.3, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.7, 1.2 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.8, 1.1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("willow_sprite_wing_right_big:scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6, 0.7, 0.8, 1, 1.4, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1.36604, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.8, 1.2 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.9, 1.1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("willow_sprite_wing_left_small:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("willow_sprite_wing_right_small:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("willow_sprite_wing_left_big:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 0.435275, 1 ),
+"update": 0,
+"values": [ -20.0, -36.0, -20.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("willow_sprite_wing_right_big:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 0.450625, 1 ),
+"update": 0,
+"values": [ -25.0, -27.0, -25.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("willow_sprite_wing_left_small:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -6.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("willow_sprite_wing_right_small:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.5, 0.7, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 20.0, 0.0, 7.35384 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("willow_sprite_wing_right_small:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.2, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.1 ), Vector2( 1, 1.0171 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("willow_sprite_wing_left_big:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 1.2 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("willow_sprite_wing_right_big:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.5, 1.3 ), Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("willow_sprite_wing_left_small:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.2, 0.5, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.1 ), Vector2( 1, 1.0171 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("willow_sprite_flap_left:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -22.0, -18.0, -22.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("willow_sprite_flap_right:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -12.0, -16.0, -12.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("willow_sprite_legs:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -20.0, -22.0, -19.0, -20.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("willow_sprite_hand_left:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -5.0, 0.0 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("willow_sprite_hand_left/willow_sprite_lamp:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1.46409, 1.68179 ),
+"update": 0,
+"values": [ -30.0, -33.0, -30.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("willow_sprite_head:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 17.0, 18.0, 17.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("willow_sprite_head:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.4104, -13.0325 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("willow_sprite_wing_left_big:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 0.435275, 1 ),
+"update": 0,
+"values": [ 25.0, 27.0, 26.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("willow_sprite_wing_right_big:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 0.450625, 1 ),
+"update": 0,
+"values": [ 30.0, 45.0, 30.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("willow_sprite_wing_left_small:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -20.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("willow_sprite_wing_right_small:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 6.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("willow_sprite_wing_right_small:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.1 ), Vector2( 1, 1.0171 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("willow_sprite_wing_left_big:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.5, 1.3 ), Vector2( 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("willow_sprite_wing_right_big:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 1.2 ), Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("willow_sprite_wing_left_small:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.2, 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1.1 ), Vector2( 1, 1.0171 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("willow_sprite_flap_left:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 22.0, 18.0, 22.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("willow_sprite_flap_right:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 12.0, 16.0, 12.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("willow_sprite_legs:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 20.0, 22.0, 19.0, 20.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("willow_sprite_hand_left:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 5.0, 10.0, 5.0 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("willow_sprite_hand_left/willow_sprite_lamp:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1.46409, 1.68179 ),
+"update": 0,
+"values": [ 30.0, 35.0, 30.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("willow_sprite_head:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -16.0, -18.0, -16.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("willow_sprite_head:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.4104, -13.0325 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "willow_attack_start"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("willow_sprite_hand_right_upper:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 0.757858, 1 ),
+"update": 0,
+"values": [ 0.0, -160.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("willow_sprite_hand_right_upper/willow_sprite_hand_right_lower:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0, -10.0 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "player_seal_animation"
+length = 16.0
+loop = true
+step = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("player_seal/player_seal_inner:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 16 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("player_seal/player_seal_inner:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 4, 8, 12, 16 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.313726 ), Color( 0.666667, 1, 1, 0.501961 ), Color( 1, 1, 1, 0.313726 ), Color( 0.666667, 1, 1, 0.501961 ), Color( 1, 1, 1, 0.313726 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "player_seal_show"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("player_seal:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Curve" id=15]
+min_value = 0.94
+max_value = 1.03
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.02783 ), 0.261561, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=16]
+width = 32
+curve = SubResource( 15 )
+
+[sub_resource type="Curve" id=17]
+_data = [ Vector2( 0, 0.3713 ), 0.0, 1.66541, 0, 0, Vector2( 1, 0.389482 ), -1.96212, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=18]
+width = 32
+curve = SubResource( 17 )
+
+[sub_resource type="ParticlesMaterial" id=19]
+trail_divisor = 3
+emission_shape = 1
+emission_sphere_radius = 9.67
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 40, 0 )
+initial_velocity = 127.01
+initial_velocity_random = 0.19
+angular_velocity = 430.95
+angular_velocity_random = 0.5
+orbit_velocity = 0.6
+orbit_velocity_random = 0.8
+linear_accel = -100.0
+radial_accel = -68.83
+tangential_accel = -58.25
+tangential_accel_random = 0.55
+damping = 100.0
+scale = 0.7
+scale_random = 0.28
+scale_curve = SubResource( 18 )
+hue_variation_curve = SubResource( 16 )
+
+[sub_resource type="ParticlesMaterial" id=20]
+trail_divisor = 3
+emission_shape = 1
+emission_sphere_radius = 9.67
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 40, 0 )
+initial_velocity = 127.01
+initial_velocity_random = 0.19
+angular_velocity = 430.95
+angular_velocity_random = 0.5
+orbit_velocity = -0.6
+orbit_velocity_random = 0.8
+linear_accel = -100.0
+radial_accel = -48.39
+tangential_accel = -100.0
+tangential_accel_random = 0.55
+damping = 100.0
+scale = 0.7
+scale_random = 0.28
+scale_curve = SubResource( 18 )
+hue_variation_curve = SubResource( 16 )
+
+[sub_resource type="Curve" id=21]
+_data = [ Vector2( 0, 0.842424 ), 0.0, 0.911437, 0, 0, Vector2( 1, 0.0424244 ), -2.55929, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=22]
+width = 32
+curve = SubResource( 21 )
+
+[sub_resource type="ParticlesMaterial" id=23]
+lifetime_randomness = 0.2
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 30, 0 )
+initial_velocity = 222.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -100.0
+radial_accel = -100.0
+damping = 100.0
+scale_curve = SubResource( 22 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 23 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 23 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 23 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 23 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 23 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 4
+atlas = ExtResource( 23 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 4
+atlas = ExtResource( 23 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=31]
+flags = 4
+atlas = ExtResource( 23 )
+region = Rect2( 192, 64, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=32]
+animations = [ {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), null ],
+"loop": false,
+"name": "default",
+"speed": 60.0
+} ]
+
+[sub_resource type="AtlasTexture" id=33]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=34]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=35]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=36]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=37]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=38]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=39]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=40]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 192, 64, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=41]
+animations = [ {
+"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ), SubResource( 40 ), null ],
+"loop": false,
+"name": "default",
+"speed": 60.0
+} ]
+
+[sub_resource type="Animation" id=42]
+resource_name = "shadow_seal_collapse"
+length = 5.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("shadow_seal_rotator/shadow_seal:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 0.68302, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("shadow_seal_rotator/shadow_seal:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 0.554785, 1 ),
+"update": 0,
+"values": [ 0.0, -960.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("shadow_seal_rotator/shadow_seal:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 5, 5.2 ),
+"transitions": PoolRealArray( 1, 1.41421, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.501961 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("shadow_seal_rotator/shadow_seal:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/keys = {
+"times": PoolRealArray( 0, 5.2, 5.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, true, false ]
+}
+
+[sub_resource type="Animation" id=43]
+resource_name = "player_hit_blinking"
+tracks/0/type = "value"
+tracks/0/path = NodePath("willow_sprite_body:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true, false, true, false, true ]
+}
+
+[sub_resource type="AtlasTexture" id=44]
+flags = 4
+atlas = ExtResource( 26 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=45]
+flags = 4
+atlas = ExtResource( 26 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=46]
+flags = 4
+atlas = ExtResource( 26 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=47]
+flags = 4
+atlas = ExtResource( 26 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=48]
+flags = 4
+atlas = ExtResource( 26 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=49]
+flags = 4
+atlas = ExtResource( 26 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=50]
+flags = 4
+atlas = ExtResource( 26 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=51]
+flags = 4
+atlas = ExtResource( 26 )
+region = Rect2( 192, 64, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=52]
+animations = [ {
+"frames": [ null, SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ), SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), null ],
+"loop": false,
+"name": "default",
+"speed": 60.0
+} ]
+
+[sub_resource type="Gradient" id=53]
+offsets = PoolRealArray( 0, 0.707627 )
+colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 0.0352941 )
+
+[sub_resource type="GradientTexture" id=54]
+gradient = SubResource( 53 )
+
+[sub_resource type="ParticlesMaterial" id=55]
+flag_disable_z = true
+direction = Vector3( -1, -1, 0 )
+spread = 160.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 80.0
+angular_velocity = 80.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 126.1
+angle_random = 1.0
+scale = 1.6
+color_ramp = SubResource( 54 )
+
+[node name="player" type="Node2D"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_vertical_guides_": [ -121.724 ]
+}
+speed_default = 350
+is_invunerable = true
+
+[node name="player_shoot_from" type="Position2D" parent="."]
+position = Vector2( 0, -28 )
+
+[node name="hitbox_area" type="Area2D" parent="."]
+priority = 2.0
+monitorable = false
+collision_layer = 4
+collision_mask = 25
+
+[node name="hitbox_shape" type="CollisionShape2D" parent="hitbox_area"]
+shape = SubResource( 1 )
+
+[node name="hitbox_sprite" type="Sprite" parent="."]
+visible = false
+z_index = 3
+texture = ExtResource( 2 )
+
+[node name="graze_area" type="Area2D" parent="."]
+visible = false
+collision_layer = 64
+
+[node name="graze_shape" type="CollisionShape2D" parent="graze_area"]
+shape = SubResource( 2 )
+
+[node name="collect_area" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 128
+
+[node name="collect_shape" type="CollisionShape2D" parent="collect_area"]
+shape = SubResource( 3 )
+
+[node name="debug_label" type="Label" parent="."]
+margin_left = 0.364937
+margin_right = 40.3649
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="status_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="bomb_area" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="bomb_shape" type="CollisionShape2D" parent="bomb_area"]
+shape = SubResource( 4 )
+
+[node name="move_tween" type="Tween" parent="."]
+
+[node name="bomb_projectile_path" type="Path2D" parent="."]
+curve = SubResource( 5 )
+
+[node name="bomb_projectile_path_follower" type="PathFollow2D" parent="bomb_projectile_path"]
+position = Vector2( -21.3405, 17.7337 )
+rotation = -2.58188
+
+[node name="jex" parent="bomb_projectile_path/bomb_projectile_path_follower" instance=ExtResource( 25 )]
+visible = false
+
+[node name="bomb_position" type="Sprite" parent="bomb_projectile_path/bomb_projectile_path_follower"]
+visible = false
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+script = ExtResource( 5 )
+
+[node name="bomb_shooter_timer" type="Timer" parent="bomb_projectile_path"]
+wait_time = 0.02
+
+[node name="shadow_realm_timer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 5.0
+one_shot = true
+
+[node name="willow_sprite_body" type="Sprite" parent="."]
+position = Vector2( -0.241135, 0 )
+z_index = 1
+texture = ExtResource( 11 )
+
+[node name="willow_animation_general" type="AnimationPlayer" parent="willow_sprite_body"]
+autoplay = "willow_idle"
+anims/attack_start = SubResource( 6 )
+anims/willow_back = SubResource( 7 )
+anims/willow_forward = SubResource( 8 )
+anims/willow_idle = SubResource( 9 )
+anims/willow_turn_left = SubResource( 10 )
+anims/willow_turn_right = SubResource( 11 )
+blend_times = [ "willow_back", "willow_back", 0.5, "willow_back", "willow_forward", 0.5, "willow_back", "willow_idle", 0.5, "willow_back", "willow_turn_left", 0.5, "willow_back", "willow_turn_right", 0.5, "willow_forward", "willow_back", 0.5, "willow_forward", "willow_forward", 0.5, "willow_forward", "willow_idle", 0.5, "willow_forward", "willow_turn_left", 0.5, "willow_forward", "willow_turn_right", 0.5, "willow_idle", "willow_back", 0.5, "willow_idle", "willow_forward", 0.5, "willow_idle", "willow_idle", 0.5, "willow_idle", "willow_turn_left", 0.5, "willow_idle", "willow_turn_right", 0.5, "willow_turn_left", "willow_back", 0.5, "willow_turn_left", "willow_forward", 0.5, "willow_turn_left", "willow_idle", 0.5, "willow_turn_left", "willow_turn_left", 0.5, "willow_turn_left", "willow_turn_right", 0.5, "willow_turn_right", "willow_back", 0.5, "willow_turn_right", "willow_forward", 0.5, "willow_turn_right", "willow_idle", 0.5, "willow_turn_right", "willow_turn_left", 0.5, "willow_turn_right", "willow_turn_right", 0.5 ]
+
+[node name="willow_animation_attack" type="AnimationPlayer" parent="willow_sprite_body"]
+anims/willow_attack_start = SubResource( 12 )
+
+[node name="willow_sprite_head" type="Sprite" parent="willow_sprite_body"]
+position = Vector2( 0.4104, -13.0325 )
+z_index = -1
+texture = ExtResource( 12 )
+offset = Vector2( 0.5896, -4.96746 )
+
+[node name="willow_sprite_legs" type="Sprite" parent="willow_sprite_body"]
+position = Vector2( 0.163033, 8.23932 )
+z_index = -1
+texture = ExtResource( 9 )
+offset = Vector2( -0.404182, 14.4991 )
+
+[node name="willow_sprite_flap_left" type="Sprite" parent="willow_sprite_body"]
+position = Vector2( -3.55066, 8.23932 )
+texture = ExtResource( 7 )
+offset = Vector2( -3.23683, 9.15854 )
+
+[node name="willow_sprite_flap_right" type="Sprite" parent="willow_sprite_body"]
+position = Vector2( 3.87673, 7.62037 )
+texture = ExtResource( 13 )
+offset = Vector2( 3.11648, 9.50093 )
+
+[node name="willow_sprite_hand_left" type="Sprite" parent="willow_sprite_body"]
+position = Vector2( -7.8833, -3.39693 )
+z_index = -1
+texture = ExtResource( 14 )
+offset = Vector2( -3.65623, 9.18441 )
+
+[node name="willow_sprite_lamp" type="Sprite" parent="willow_sprite_body/willow_sprite_hand_left"]
+position = Vector2( -9.1262, 16.7361 )
+texture = ExtResource( 15 )
+offset = Vector2( -3.26871, 10.6211 )
+
+[node name="willow_sprite_hand_right_upper" type="Sprite" parent="willow_sprite_body"]
+position = Vector2( 8.45695, -5.0062 )
+z_index = -2
+texture = ExtResource( 16 )
+offset = Vector2( 4.08258, 5.0062 )
+
+[node name="willow_sprite_hand_right_lower" type="Sprite" parent="willow_sprite_body/willow_sprite_hand_right_upper"]
+position = Vector2( 4.33264, 9.53182 )
+texture = ExtResource( 10 )
+offset = Vector2( 3.6236, 5.30671 )
+
+[node name="willow_sprite_wing_left_big" type="Sprite" parent="willow_sprite_body"]
+position = Vector2( -1.51877, -4.83362 )
+texture = ExtResource( 8 )
+offset = Vector2( -15.6025, -15.6637 )
+
+[node name="willow_sprite_wing_left_small" type="Sprite" parent="willow_sprite_body"]
+position = Vector2( -1.32244, -3.64451 )
+texture = ExtResource( 17 )
+offset = Vector2( -9.77023, 7.46741 )
+
+[node name="willow_sprite_wing_right_big" type="Sprite" parent="willow_sprite_body"]
+position = Vector2( 3.30414, -5.07476 )
+texture = ExtResource( 18 )
+offset = Vector2( 15.7463, -15.4226 )
+
+[node name="willow_sprite_wing_right_small" type="Sprite" parent="willow_sprite_body"]
+position = Vector2( 1.15335, -5.0062 )
+texture = ExtResource( 6 )
+offset = Vector2( 10.1451, 7.62337 )
+
+[node name="player_seal_animation" type="AnimationPlayer" parent="."]
+autoplay = "player_seal_animation"
+anims/player_seal_animation = SubResource( 13 )
+
+[node name="player_seal_shower" type="AnimationPlayer" parent="."]
+anims/player_seal_show = SubResource( 14 )
+
+[node name="player_seal" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+z_index = -1
+
+[node name="player_seal_inner" type="Sprite" parent="player_seal"]
+modulate = Color( 1, 1, 1, 0.313726 )
+scale = Vector2( 0.994114, 0.994114 )
+z_index = -1
+texture = ExtResource( 19 )
+
+[node name="shadow_particles_cyan" type="Particles2D" parent="."]
+z_index = 6
+emitting = false
+amount = 4
+lifetime = 0.4
+process_material = SubResource( 19 )
+texture = ExtResource( 21 )
+
+[node name="shadow_particles_pink" type="Particles2D" parent="."]
+z_index = 6
+emitting = false
+amount = 4
+lifetime = 0.4
+process_material = SubResource( 20 )
+texture = ExtResource( 22 )
+
+[node name="shadow_particles_enter" type="Particles2D" parent="."]
+z_index = 2
+emitting = false
+amount = 9
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.88
+local_coords = false
+process_material = SubResource( 23 )
+texture = ExtResource( 21 )
+
+[node name="shadow_enter_explode" type="AnimatedSprite" parent="."]
+visible = false
+z_index = 2
+frames = SubResource( 32 )
+
+[node name="shadow_exit_explode" type="AnimatedSprite" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+z_index = 2
+frames = SubResource( 41 )
+
+[node name="shadow_seal_collapse" type="AnimationPlayer" parent="."]
+anims/shadow_seal_collapse = SubResource( 42 )
+
+[node name="shadow_seal_rotator" type="Node2D" parent="."]
+
+[node name="shadow_seal" type="Sprite" parent="shadow_seal_rotator"]
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 1e-05, 1e-05 )
+z_index = -1
+texture = ExtResource( 20 )
+
+[node name="player_hit_animation" type="AnimationPlayer" parent="."]
+anims/player_hit_blinking = SubResource( 43 )
+
+[node name="jex_appear" type="AnimatedSprite" parent="."]
+position = Vector2( -21.1301, 20.1164 )
+scale = Vector2( 1.4, 1.4 )
+z_index = 2
+frames = SubResource( 52 )
+
+[node name="jex_appear_smoke" type="Particles2D" parent="."]
+emitting = false
+amount = 12
+one_shot = true
+explosiveness = 0.94
+fract_delta = false
+process_material = SubResource( 55 )
+texture = ExtResource( 27 )
+
+[node name="bomb_cooldown_timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+[connection signal="hit" from="." to="." method="_on_player_hit"]
+[connection signal="hit_by_spell" from="." to="." method="_on_player_hit_by_spell"]
+[connection signal="area_entered" from="hitbox_area" to="." method="_on_hitbox_area_area_entered"]
+[connection signal="area_entered" from="graze_area" to="." method="_on_graze_area_area_entered"]
+[connection signal="area_entered" from="collect_area" to="." method="_on_collect_area_area_entered"]
+[connection signal="timeout" from="status_timer" to="." method="_on_status_timer_timeout"]
+[connection signal="timeout" from="bomb_projectile_path/bomb_shooter_timer" to="." method="_on_bomb_shooter_timer_timeout"]
+[connection signal="timeout" from="shadow_realm_timer" to="." method="_on_shadow_realm_timer_timeout"]

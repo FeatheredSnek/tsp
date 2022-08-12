@@ -1,0 +1,1922 @@
+[gd_scene load_steps=37 format=2]
+
+[ext_resource path="res://backgrounds/bg_midlane/materials/material_road.tres" type="Material" id=1]
+[ext_resource path="res://backgrounds/bg_midlane/materials/material_road_special.tres" type="Material" id=2]
+[ext_resource path="res://backgrounds/bg_midlane/materials/material_trees.tres" type="Material" id=3]
+[ext_resource path="res://backgrounds/bg_midlane/materials/material_stairs.tres" type="Material" id=4]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/stairs_b.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/tree_c.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/road_b.obj" type="ArrayMesh" id=7]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/stairs_a.obj" type="ArrayMesh" id=8]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/tree_b.obj" type="ArrayMesh" id=9]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/road_a.obj" type="ArrayMesh" id=10]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/road_c.obj" type="ArrayMesh" id=11]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/road_d.obj" type="ArrayMesh" id=12]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/tree_a.obj" type="ArrayMesh" id=13]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/rock_a.obj" type="ArrayMesh" id=14]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/rock_b.obj" type="ArrayMesh" id=15]
+[ext_resource path="res://backgrounds/bg_midlane/materials/material_doodads.tres" type="Material" id=16]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/lantern.obj" type="ArrayMesh" id=17]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/statue_b.obj" type="ArrayMesh" id=18]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/crystal_a.obj" type="ArrayMesh" id=19]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/crystal_b.obj" type="ArrayMesh" id=20]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/statue_a.obj" type="ArrayMesh" id=21]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/rock_c.obj" type="ArrayMesh" id=22]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/bush_a.obj" type="ArrayMesh" id=23]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/bush_b.obj" type="ArrayMesh" id=24]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/wall_b.obj" type="ArrayMesh" id=25]
+[ext_resource path="res://backgrounds/bg_midlane/meshes/wall_a.obj" type="ArrayMesh" id=26]
+[ext_resource path="res://backgrounds/bg_midlane/midlane_env.tres" type="Environment" id=27]
+[ext_resource path="res://backgrounds/bg_midlane/materials/material_fire.tres" type="Material" id=28]
+[ext_resource path="res://backgrounds/bg_midlane/bg_midlane.gd" type="Script" id=29]
+[ext_resource path="res://backgrounds/bg_midlane/camera_movement_1.tres" type="Animation" id=30]
+
+[sub_resource type="Animation" id=1]
+resource_name = "end_loop"
+length = 10.0
+loop = true
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("camera:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -160.7, 7.2, 0 ), Vector3( -180.7, 7.2, 0 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "end_loop_transition"
+length = 10.0
+step = 1.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("camera:translation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -142.162, -0.25, -0.00835484, 1.93547, 0.064682, -150.7, -1.01087, 1.87782, 0.614329, -1.14119, -160.7, -0.248798, 0.498291, 0.25, -0.500698 ),
+"times": PoolRealArray( 0, 5, 10 )
+}
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -1.77444, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 0.07
+gravity = Vector3( 0, 5, 0 )
+scale = 0.4
+scale_curve = SubResource( 4 )
+
+[sub_resource type="PlaneMesh" id=6]
+material = ExtResource( 28 )
+size = Vector2( 0.5, 0.5 )
+
+[node name="bg_midlane" type="Spatial"]
+script = ExtResource( 29 )
+
+[node name="camera" type="Camera" parent="."]
+transform = Transform( -1.62921e-07, -0.766044, 0.642788, 0, 0.642788, 0.766044, -1, 1.24804e-07, -1.04723e-07, -180.7, 7.2, 0 )
+current = true
+fov = 44.0
+
+[node name="environment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 27 )
+
+[node name="sun" type="DirectionalLight" parent="."]
+transform = Transform( 0.991452, -0.0147249, 0.129641, -0.130474, -0.111892, 0.985118, 0, -0.993611, -0.112856, 0, 12.4391, 0 )
+shadow_enabled = true
+shadow_color = Color( 0.823529, 0.823529, 0.823529, 1 )
+directional_shadow_mode = 0
+
+[node name="camera_animation" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = ExtResource( 30 )
+anims/end_loop = SubResource( 1 )
+anims/end_loop_transition = SubResource( 2 )
+
+[node name="midlane_section_a" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.2065, 0, -1.60835 )
+
+[node name="lantern" type="MeshInstance" parent="midlane_section_a"]
+mesh = ExtResource( 17 )
+material/0 = ExtResource( 16 )
+
+[node name="lantern2" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, -0.939693, 23.2667, 0, 2.51808 )
+mesh = ExtResource( 17 )
+material/0 = ExtResource( 16 )
+
+[node name="road_a_1" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7935, 0, 1.60835 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 1 )
+
+[node name="road_b_2" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2065, 0, 1.60835 )
+mesh = ExtResource( 7 )
+material/0 = ExtResource( 1 )
+
+[node name="road_a_3" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.2065, 0, 1.60835 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 1 )
+
+[node name="road_d_4" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42.2065, 0, 1.60835 )
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 2 )
+
+[node name="road_c_7" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -62.2065, 0, 1.60835 )
+mesh = ExtResource( 11 )
+material/0 = ExtResource( 2 )
+
+[node name="stairs_b" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -62.0485, 0, 1.60835 )
+mesh = ExtResource( 5 )
+material/0 = ExtResource( 4 )
+
+[node name="fire_right" type="Particles" parent="midlane_section_a/stairs_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.187, 1.238, 1.303 )
+amount = 16
+lifetime = 0.4
+draw_order = 1
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 6 )
+
+[node name="fire_left" type="Particles" parent="midlane_section_a/stairs_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.049, 1.16, -1.482 )
+amount = 16
+lifetime = 0.4
+draw_order = 1
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 6 )
+
+[node name="tree_a" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.262424, 0, -0.971126, 0, 1.1, 0, 1.06824, 0, 0.238567, 23.5112, 0, 4.51972 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a4" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.70234, 0, 0.711842, 0, 1, 0, -0.711842, 0, -0.70234, 18.2688, 0, 3.67494 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a8" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.0636814, 0, 1.19831, 0, 1.2, 0, -1.19831, 0, 0.0636814, 16.4584, 0, 3.32648 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a7" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.441396, 0, 0.897312, 0, 1, 0, -0.897312, 0, 0.441396, 13.4516, 0, -1.09512 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a9" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.441396, 0, 0.897312, 0, 1, 0, -0.897312, 0, 0.441396, 8.2565, 0, 3.5413 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a26" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.468685, 0, -0.883365, 0, 1, 0, 0.883365, 0, -0.468685, -36.1079, 0, 4.38617 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a6" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.255429, 0, 0.966828, 0, 1, 0, -0.966828, 0, 0.255429, 19.754, 0, 4.94358 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a5" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.472197, 0, 0.881493, 0, 1, 0, -0.881493, 0, 0.472197, -10.3527, 3.8147e-06, 4.20104 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a2" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.838671, 0, 0.544639, 0, 1, 0, -0.544639, 0, 0.838671, 27.457, 0, 3.13078 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a3" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1.01734, 0, -0.418361, 0, 1.1, 0, 0.418361, 0, 1.01734, 23.9873, 0, -1.06816 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5659, 0, -0.47725 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b2" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.77, 0, -0.47725 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b4" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1906, 0, -0.65518 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b5" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.181721, 0, -0.98335, 0, 1, 0, 0.98335, 0, 0.181721, 19.141, 0, -1.3892 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b11" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.181721, 0, -0.98335, 0, 1, 0, 0.98335, 0, 0.181721, -5.7094, 0, 3.77291 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b25" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.181721, 0, -0.98335, 0, 1, 0, 0.98335, 0, 0.181721, -61.3939, -1.90735e-06, -1.4659 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b3" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.88984, 0, -0.646672, 0, 1.1, 0, 0.646672, 0, 0.88984, 25.1517, 0, 3.08094 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8311, 0, 3.02258 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c2" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.994474, 0, 0.104979, 0, 1, 0, -0.104979, 0, -0.994474, 26.0982, 0, -0.99326 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c3" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, 17.1632, 0, -0.99326 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c4" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, 10.1159, 0, 4.36513 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c14" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.291787, 0, 0.956483, 0, 1, 0, -0.956483, 0, -0.291787, -37.9413, 0, 3.50575 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c18" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.994456, 0, -0.105153, 0, 1, 0, 0.105153, 0, 0.994456, -42.1041, 0, 4.91202 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="rock_a" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3512, 0, 3.60753 )
+mesh = ExtResource( 14 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_b" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 12.1877, 0, 4.64127 )
+mesh = ExtResource( 15 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_b2" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -2.69224, 0, -4.2133, 0, 5, 0, 4.2133, 0, -2.69224, 14.2877, 0, 5.92856 )
+mesh = ExtResource( 15 )
+material/0 = ExtResource( 16 )
+
+[node name="tree_a10" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1.01734, 0, -0.418361, 0, 1.1, 0, 0.418361, 0, 1.01734, 1.6953, 0, 3.827 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a14" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1.01734, 0, -0.418361, 0, 1.1, 0, 0.418361, 0, 1.01734, -3.5046, 4.76837e-07, 4.29567 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b6" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.793513, 0, -0.608554, 0, 1, 0, 0.608554, 0, 0.793513, 5.968, 0, 2.95459 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b7" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.0395214, 0, -0.999219, 0, 1, 0, 0.999219, 0, 0.0395214, 5.968, 0, 5.00242 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c5" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.994474, 0, 0.104979, 0, 1, 0, -0.104979, 0, -0.994474, 4.4817, 0, 4.03052 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b19" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.774492, 0, 0.632584, 0, 1, 0, -0.632584, 0, -0.774492, -33.8385, 0, 5.04272 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b18" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.00888364, 0, 0.99996, 0, 1, 0, -0.99996, 0, -0.00888364, -33.7757, 0, 2.99586 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c13" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.99079, 0, -0.135404, 0, 1, 0, 0.135404, 0, 0.99079, -32.32, 0, 4.01284 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a12" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.262424, 0, -0.971126, 0, 1.1, 0, 1.06824, 0, 0.238567, 7.8553, 0, -0.88249 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a11" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.255429, 0, 0.966828, 0, 1, 0, -0.966828, 0, 0.255429, 3.2085, 0, -1.77428 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b8" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -1.05147, 0, -0.323114, 0, 1.1, 0, 0.323114, 0, -1.05147, 9.806, 0, -1.34661 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c6" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1752, 0, -1.39547 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a13" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.472197, 0, 0.881493, 0, 1, 0, -0.881493, 0, 0.472197, -1.0596, 9.53674e-07, -0.89948 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b10" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4347, 9.53674e-07, -0.8422 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b9" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.181721, 0, -0.98335, 0, 1, 0, 0.98335, 0, 0.181721, -0.623798, 1.43051e-06, 3.91008 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c7" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -2.9315, 9.53674e-07, -1.11912 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c8" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -12.3649, 9.53674e-07, 3.4314 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c17" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -43.5855, 2.86102e-06, 4.19409 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a16" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.0636814, 0, 1.19831, 0, 1.2, 0, -1.19831, 0, 0.0636814, -6.413, 0, -0.92916 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a15" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.255429, 0, 0.966828, 0, 1, 0, -0.966828, 0, 0.255429, -8.1592, 0, 4.81516 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a18" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1.01734, 0, -0.418361, 0, 1.1, 0, 0.418361, 0, 1.01734, -14.1733, 4.29153e-06, 4.52476 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a17" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1.17172, 0, -0.258991, 0, 1.2, 0, 0.258991, 0, 1.17172, -9.4538, -3.8147e-06, -0.76446 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a20" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.441396, 0, 0.897312, 0, 1, 0, -0.897312, 0, 0.441396, -26.7565, -1.90735e-06, -1.40347 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a35" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.441396, 0, 0.897312, 0, 1, 0, -0.897312, 0, 0.441396, -58.6326, -3.8147e-06, 3.88892 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a36" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.484443, 0, -0.874823, 0, 1, 0, 0.874823, 0, 0.484443, -61.106, -5.72205e-06, 4.46291 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a33" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.441396, 0, 0.897312, 0, 1, 0, -0.897312, 0, 0.441396, -54.1231, -1.90735e-06, 4.5774 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a19" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1.01734, 0, -0.418361, 0, 1.1, 0, 0.418361, 0, 1.01734, -16.2519, 0, -1.35694 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b14" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1136, 0, -1.0699 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b13" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0303, -9.53674e-07, -0.62432 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b12" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.181721, 0, -0.98335, 0, 1, 0, 0.98335, 0, 0.181721, -21.0982, 0, -1.67797 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c10" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.994474, 0, 0.104979, 0, 1, 0, -0.104979, 0, -0.994474, -14.141, 0, -1.28204 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c9" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -23.076, 0, -1.05206 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c12" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.141747, 0, 0.989903, 0, 1, 0, -0.989903, 0, -0.141747, -30.9629, -9.53674e-07, -1.40993 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c20" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.141747, 0, 0.989903, 0, 1, 0, -0.989903, 0, -0.141747, -56.7581, -9.53674e-07, -1.3007 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c21" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.823216, 0, 0.567729, 0, 1, 0, -0.567729, 0, 0.823216, -59.2803, -9.53674e-07, -1.02332 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c16" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.141747, 0, 0.989903, 0, 1, 0, -0.989903, 0, -0.141747, -49.7841, -9.53674e-07, -0.59346 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c11" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -28.8223, 0, 3.74287 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a22" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.678981, 0, -0.786763, 0, 1.1, 0, 0.865439, 0, 0.617256, -21.659, -9.53674e-07, 4.4266 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a34" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.678981, 0, -0.786763, 0, 1.1, 0, 0.865439, 0, 0.617256, -53.5267, 9.53674e-07, -1.13243 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a25" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1.09033, 0, 0.132308, 0, 1.1, 0, -0.145539, 0, 0.991209, -29.9238, -9.53674e-07, 5.20998 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a24" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.817472, 0, -0.669118, 0, 1.1, 0, 0.736029, 0, -0.743157, -19.652, -9.53674e-07, 5.30986 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a23" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.678528, 0, 0.787086, 0, 1.1, 0, -0.865794, 0, 0.616844, -24.0132, -9.53674e-07, 3.77181 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a21" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.961238, 0, -0.275721, 0, 1, 0, 0.275721, 0, -0.961238, -15.1019, 1.90735e-06, 2.80427 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b15" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1.07717, 0, -0.222934, 0, 1.1, 0, 0.222934, 0, 1.07717, -16.8172, 0.0432062, 4.56576 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b24" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.0580488, 0, -1.09847, 0, 1.1, 0, 1.09847, 0, 0.0580488, -57.3515, 0.0432081, 4.82832 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b17" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1.07717, 0, -0.222934, 0, 1.1, 0, 0.222934, 0, 1.07717, -28.778, 0, -0.65206 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b16" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.405098, 0, 1.02269, 0, 1.1, 0, -1.02269, 0, -0.405098, -26.8599, 9.53674e-07, 4.5871 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b23" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.405098, 0, 1.02269, 0, 1.1, 0, -1.02269, 0, -0.405098, -55.6247, 9.53674e-07, 3.71203 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b22" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.405098, 0, 1.02269, 0, 1.1, 0, -1.02269, 0, -0.405098, -40.0038, 9.53674e-07, 4.06703 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b21" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33.931, 9.53674e-07, -0.8422 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c15" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -35.4058, 9.53674e-07, -1.36857 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a28" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.0636814, 0, 1.19831, 0, 1.2, 0, -1.19831, 0, 0.0636814, -39.0627, 0, -2.63925 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a27" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1.17172, 0, -0.258991, 0, 1.2, 0, 0.258991, 0, 1.17172, -43.4172, -3.8147e-06, -2.39653 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a32" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -1.15205, 0, -0.335835, 0, 1.2, 0, 0.335835, 0, -1.15205, -50.9711, -3.8147e-06, 3.81945 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b20" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44.1096, 0, -1.15808 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="statue_b" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1.56689, 0.426543, 1.16744, -0.0832398, 1.91034, -0.586252, -1.24013, 0.410709, 1.5144, -19.4637, -0.679887, 3.07407 )
+mesh = ExtResource( 18 )
+material/0 = ExtResource( 4 )
+
+[node name="tree_a30" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -1.0997, 0, 0.023246, 0, 1.1, 0, -0.0255707, 0, -0.99973, -45.508, -9.53674e-07, 0.0276 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c19" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.83322, 0, -0.552941, 0, 1, 0, 0.552941, 0, -0.83322, -48.6737, 0, 4.65265 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a31" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.678981, 0, -0.786763, 0, 1.1, 0, 0.865439, 0, 0.617256, -46.3383, -9.53674e-07, 3.47787 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a29" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.784226, 0, 0.701233, 0, 1.1, 0, -0.771356, 0, 0.712933, -47.6286, -9.53674e-07, -0.94886 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c22" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -63.7185, 0.615, 3.74335 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c23" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.93075, 0, 0.365657, 0, 1, 0, -0.365657, 0, -0.93075, -68.2132, 0.615, -0.71855 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a37" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1.09033, 0, 0.132308, 0, 1.1, 0, -0.145539, 0, 0.991209, -65.896, 0.615, 4.03268 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a41" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.478685, 0, -0.900349, 0, 1.1, 0, 0.990384, 0, -0.435168, -70.3581, 0.615002, -1.09076 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a39" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.21136, 0, 0.981366, 0, 1.1, 0, -1.0795, 0, -0.192145, -63.7257, 0.615, -1.44911 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a38" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.273633, 0, -0.968566, 0, 1.1, 0, 1.06542, 0, 0.248757, -64.0348, 0.615, 5.19134 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a40" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.273633, 0, -0.968566, 0, 1.1, 0, 1.06542, 0, 0.248757, -68.0811, 0.615, 4.86059 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b26" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.903851, 0, -0.427847, 0, 1, 0, 0.427847, 0, 0.903851, -65.795, 0.615001, -0.98928 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b27" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.994236, 0, -0.470632, 0, 1.1, 0, 0.470632, 0, 0.994236, -69.8915, 0.615001, 3.90998 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="crystal_a" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 0.979138, -0.203197, 0, 0.203197, 0.979138, -40.7951, -0.0592742, -1.33554 )
+mesh = ExtResource( 19 )
+material/0 = ExtResource( 16 )
+
+[node name="crystal_a2" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.595151, -0.0913117, 0.00218661, 0.0751045, 0.707695, 0.0809857, -0.01242, -0.0960691, 0.594505, -40.7775, -0.173034, -1.48571 )
+mesh = ExtResource( 19 )
+material/0 = ExtResource( 16 )
+
+[node name="crystal_b" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.975657, 0.219301, 0, -0.219301, 0.975657, 0, 0, 0, 1, -40.6496, 0, -1.41844 )
+mesh = ExtResource( 20 )
+material/0 = ExtResource( 16 )
+
+[node name="statue_a" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1.47099, 0, 1.35506, 0, 2, 0, -1.35506, 0, 1.47099, -53.1616, -3.8147e-06, 3.02153 )
+mesh = ExtResource( 21 )
+material/0 = ExtResource( 4 )
+
+[node name="bush_a" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1335, 0, 3.58056 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_a6" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.24129, 0, 2.89704 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_a2" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.2065, 0, -0.67965 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_a3" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.503698, 0, 0.86388, 0, 1, 0, -0.86388, 0, -0.503698, -13.4053, 0, 2.83566 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_a4" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.755548, 0, 1.29582, 0, 1.5, 0, -1.29582, 0, -0.755548, -26.2806, 0, -0.807298 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_a5" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( -0.503698, 0, 0.86388, 0, 1, 0, -0.86388, 0, -0.503698, -54.5957, 0, 2.90463 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -52.2902, 0, -0.367927 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b2" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4547, 0, 3.40041 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b3" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7246, 1.90735e-06, -0.758455 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b4" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.236014, 0, -1.2784, 0, 1.3, 0, 1.2784, 0, 0.236014, 6.88954, 0, 2.64746 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_c" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4947, 0, -0.375195 )
+mesh = ExtResource( 22 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_c2" type="MeshInstance" parent="midlane_section_a"]
+transform = Transform( 0.516175, 0, 0.856483, 0, 1, 0, -0.856483, 0, 0.516175, 19.4861, 0, -0.584005 )
+mesh = ExtResource( 22 )
+material/0 = ExtResource( 16 )
+
+[node name="midlane_section_b" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -77.79, 0.615, -1.608 )
+
+[node name="stairs_b2" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -62.048, 0, 1.608 )
+mesh = ExtResource( 5 )
+material/0 = ExtResource( 4 )
+
+[node name="fire_right" type="Particles" parent="midlane_section_b/stairs_b2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.208, 1.238, 1.303 )
+amount = 16
+lifetime = 0.4
+visibility_aabb = AABB( -0.5, -4, -4, 8, 8, 8 )
+draw_order = 1
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 6 )
+
+[node name="fire_left" type="Particles" parent="midlane_section_b/stairs_b2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.027, 1.16, -1.482 )
+amount = 16
+lifetime = 0.4
+visibility_aabb = AABB( -0.5, -4, -4, 8, 8, 8 )
+draw_order = 1
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 6 )
+
+[node name="lantern" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.0443, 0, 0 )
+mesh = ExtResource( 17 )
+material/0 = ExtResource( 16 )
+
+[node name="lantern2" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, -0.939693, 23.2667, 0, 2.51808 )
+mesh = ExtResource( 17 )
+material/0 = ExtResource( 16 )
+
+[node name="road_a_1" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.7935, 0, 1.60835 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 1 )
+
+[node name="road_b_2" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2065, 0, 1.60835 )
+mesh = ExtResource( 7 )
+material/0 = ExtResource( 1 )
+
+[node name="road_a_3" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.2065, 0, 1.60835 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 1 )
+
+[node name="road_d_4" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42.2065, 0, 1.60835 )
+mesh = ExtResource( 12 )
+material/0 = ExtResource( 2 )
+
+[node name="road_c_7" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.01, 0, 0, 0, 1, 0, 0, 0, 1, -62.207, 0, 1.608 )
+mesh = ExtResource( 11 )
+material/0 = ExtResource( 2 )
+
+[node name="tree_a" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.262424, 0, -0.971126, 0, 1.1, 0, 1.06824, 0, 0.238567, 23.5112, 0, 4.51972 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a4" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.70234, 0, 0.711842, 0, 1, 0, -0.711842, 0, -0.70234, 18.2688, 0, 3.67494 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a8" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.0636814, 0, 1.19831, 0, 1.2, 0, -1.19831, 0, 0.0636814, 16.4584, 0, 3.32648 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a7" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.441396, 0, 0.897312, 0, 1, 0, -0.897312, 0, 0.441396, 13.4516, 0, -1.09512 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a9" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.441396, 0, 0.897312, 0, 1, 0, -0.897312, 0, 0.441396, 8.2565, 0, 3.5413 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a26" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.468685, 0, -0.883365, 0, 1, 0, 0.883365, 0, -0.468685, -36.1079, 0, 4.38617 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a6" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.255429, 0, 0.966828, 0, 1, 0, -0.966828, 0, 0.255429, 19.754, 0, 4.94358 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a5" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.472197, 0, 0.881493, 0, 1, 0, -0.881493, 0, 0.472197, -10.3527, 3.8147e-06, 4.20104 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a2" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.838671, 0, 0.544639, 0, 1, 0, -0.544639, 0, 0.838671, 27.457, 0, 3.13078 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a3" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.01734, 0, -0.418361, 0, 1.1, 0, 0.418361, 0, 1.01734, 23.9873, 0, -1.06816 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5659, 0, -0.47725 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b2" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.77, 0, -0.47725 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b4" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1906, 0, -0.65518 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b5" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.181721, 0, -0.98335, 0, 1, 0, 0.98335, 0, 0.181721, 19.141, 0, -1.3892 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b11" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.181721, 0, -0.98335, 0, 1, 0, 0.98335, 0, 0.181721, -5.7094, 0, 3.77291 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b25" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.181721, 0, -0.98335, 0, 1, 0, 0.98335, 0, 0.181721, -61.3939, -1.90735e-06, -1.4659 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b3" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.88984, 0, -0.646672, 0, 1.1, 0, 0.646672, 0, 0.88984, 25.1517, 0, 3.08094 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.8311, 0, 3.02258 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c24" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.7356, 0, 4.93207 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c2" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.994474, 0, 0.104979, 0, 1, 0, -0.104979, 0, -0.994474, 26.0982, 0, -0.99326 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c3" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, 17.1632, 0, -0.99326 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c4" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, 10.1159, 0, 4.36513 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c14" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.291787, 0, 0.956483, 0, 1, 0, -0.956483, 0, -0.291787, -37.9413, 0, 3.50575 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c18" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.994456, 0, -0.105153, 0, 1, 0, 0.105153, 0, 0.994456, -42.1041, 0, 4.91202 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="rock_a" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3512, 0, 3.60753 )
+mesh = ExtResource( 14 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_b2" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -1.07689, 0, -1.68532, 0, 2, 0, 1.68532, 0, -1.07689, -21.1377, 0, 4.14205 )
+mesh = ExtResource( 15 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_b3" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.00773, 0, 1.77784, 0, 2.2, 0, -1.95563, 0, 0.916121, -20.422, 0, 4.99232 )
+mesh = ExtResource( 15 )
+material/0 = ExtResource( 16 )
+
+[node name="tree_a10" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.01734, 0, -0.418361, 0, 1.1, 0, 0.418361, 0, 1.01734, 1.6953, 0, 3.827 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a14" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.01734, 0, -0.418361, 0, 1.1, 0, 0.418361, 0, 1.01734, -3.5046, 4.76837e-07, 4.29567 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b6" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.793513, 0, -0.608554, 0, 1, 0, 0.608554, 0, 0.793513, 5.968, 0, 2.95459 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b7" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.0395214, 0, -0.999219, 0, 1, 0, 0.999219, 0, 0.0395214, 5.968, 0, 5.00242 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c5" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.994474, 0, 0.104979, 0, 1, 0, -0.104979, 0, -0.994474, 4.4817, 0, 4.03052 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b19" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.774492, 0, 0.632584, 0, 1, 0, -0.632584, 0, -0.774492, -33.8385, 0, 5.04272 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b18" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.00888364, 0, 0.99996, 0, 1, 0, -0.99996, 0, -0.00888364, -33.7757, 0, 2.99586 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c13" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.99079, 0, -0.135404, 0, 1, 0, 0.135404, 0, 0.99079, -32.32, 0, 4.01284 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a12" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.262424, 0, -0.971126, 0, 1.1, 0, 1.06824, 0, 0.238567, 7.8553, 0, -0.88249 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a11" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.255429, 0, 0.966828, 0, 1, 0, -0.966828, 0, 0.255429, 3.2085, 0, -1.77428 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b8" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -1.05147, 0, -0.323114, 0, 1.1, 0, 0.323114, 0, -1.05147, 9.806, 0, -1.34661 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c6" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1752, 0, -1.39547 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a13" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.472197, 0, 0.881493, 0, 1, 0, -0.881493, 0, 0.472197, -1.0596, 9.53674e-07, -0.89948 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b10" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4347, 9.53674e-07, -0.8422 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b9" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.181721, 0, -0.98335, 0, 1, 0, 0.98335, 0, 0.181721, -0.623798, 1.43051e-06, 3.91008 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c7" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -2.9315, 9.53674e-07, -1.11912 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c8" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -12.3649, 9.53674e-07, 3.4314 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c17" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -43.5855, 2.86102e-06, 4.19409 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a16" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.0636814, 0, 1.19831, 0, 1.2, 0, -1.19831, 0, 0.0636814, -6.413, 0, -0.92916 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a15" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.255429, 0, 0.966828, 0, 1, 0, -0.966828, 0, 0.255429, -8.1592, 0, 4.81516 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a18" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.01734, 0, -0.418361, 0, 1.1, 0, 0.418361, 0, 1.01734, -14.1733, 4.29153e-06, 4.52476 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a17" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.17172, 0, -0.258991, 0, 1.2, 0, 0.258991, 0, 1.17172, -9.4538, -3.8147e-06, -0.76446 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a20" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.441396, 0, 0.897312, 0, 1, 0, -0.897312, 0, 0.441396, -26.7565, -1.90735e-06, -1.40347 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a35" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.441396, 0, 0.897312, 0, 1, 0, -0.897312, 0, 0.441396, -58.6326, -3.8147e-06, 3.88892 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a36" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.484443, 0, -0.874823, 0, 1, 0, 0.874823, 0, 0.484443, -61.106, -5.72205e-06, 4.46291 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a33" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.441396, 0, 0.897312, 0, 1, 0, -0.897312, 0, 0.441396, -54.1231, -1.90735e-06, 4.5774 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a19" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.01734, 0, -0.418361, 0, 1.1, 0, 0.418361, 0, 1.01734, -16.2519, 0, -1.35694 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b14" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1136, 0, -1.0699 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b13" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.0303, -9.53674e-07, -0.62432 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b12" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.181721, 0, -0.98335, 0, 1, 0, 0.98335, 0, 0.181721, -21.0982, 0, -1.67797 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c10" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.994474, 0, 0.104979, 0, 1, 0, -0.104979, 0, -0.994474, -14.141, 0, -1.28204 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c9" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -23.076, 0, -1.05206 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c12" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.141747, 0, 0.989903, 0, 1, 0, -0.989903, 0, -0.141747, -30.9629, -9.53674e-07, -1.40993 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c20" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.141747, 0, 0.989903, 0, 1, 0, -0.989903, 0, -0.141747, -56.7581, -9.53674e-07, -1.3007 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c21" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.823216, 0, 0.567729, 0, 1, 0, -0.567729, 0, 0.823216, -59.2803, -9.53674e-07, -1.02332 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c16" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.141747, 0, 0.989903, 0, 1, 0, -0.989903, 0, -0.141747, -49.7841, -9.53674e-07, -0.59346 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c11" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -28.8223, 0, 3.74287 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a22" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.678981, 0, -0.786763, 0, 1.1, 0, 0.865439, 0, 0.617256, 12.2577, -9.53674e-07, 3.70757 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a34" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.678981, 0, -0.786763, 0, 1.1, 0, 0.865439, 0, 0.617256, -53.5267, 9.53674e-07, -1.13243 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a25" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.09033, 0, 0.132308, 0, 1.1, 0, -0.145539, 0, 0.991209, -29.9238, -9.53674e-07, 5.20998 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a24" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.817472, 0, -0.669118, 0, 1.1, 0, 0.736029, 0, -0.743157, 14.2647, -9.53674e-07, 4.59083 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a23" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.678528, 0, 0.787086, 0, 1.1, 0, -0.865794, 0, 0.616844, -24.0132, -9.53674e-07, 3.77181 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a21" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.961238, 0, -0.275721, 0, 1, 0, 0.275721, 0, -0.961238, -15.1019, 1.90735e-06, 2.80427 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b15" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.07717, 0, -0.222934, 0, 1.1, 0, 0.222934, 0, 1.07717, -16.8172, 0.0432062, 4.56576 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b24" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.0580488, 0, -1.09847, 0, 1.1, 0, 1.09847, 0, 0.0580488, -57.3515, 0.0432081, 4.82832 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b17" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.07717, 0, -0.222934, 0, 1.1, 0, 0.222934, 0, 1.07717, -28.778, 0, -0.65206 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b16" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.405098, 0, 1.02269, 0, 1.1, 0, -1.02269, 0, -0.405098, -26.8599, 9.53674e-07, 4.5871 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b23" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.405098, 0, 1.02269, 0, 1.1, 0, -1.02269, 0, -0.405098, -55.6247, 9.53674e-07, 3.71203 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b22" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.405098, 0, 1.02269, 0, 1.1, 0, -1.02269, 0, -0.405098, -40.0038, 9.53674e-07, 4.06703 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b21" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33.931, 9.53674e-07, -0.8422 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c15" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -35.4058, 9.53674e-07, -1.36857 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a28" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.0636814, 0, 1.19831, 0, 1.2, 0, -1.19831, 0, 0.0636814, -39.0594, 0, -2.64493 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a27" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.17172, 0, -0.258991, 0, 1.2, 0, 0.258991, 0, 1.17172, -43.4172, -3.8147e-06, -2.39653 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a32" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -1.15205, 0, -0.335835, 0, 1.2, 0, 0.335835, 0, -1.15205, -50.9711, -3.8147e-06, 3.81945 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b20" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44.1096, 0, -1.15808 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="statue_b" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.39647, -0.364085, -1.38467, -0.0832398, 1.91034, -0.586252, 1.42931, 0.466972, 1.31871, 0.117226, -0.956081, -0.263841 )
+mesh = ExtResource( 18 )
+material/0 = ExtResource( 4 )
+
+[node name="tree_a30" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -1.0997, 0, 0.023246, 0, 1.1, 0, -0.0255707, 0, -0.99973, -45.508, -9.53674e-07, 0.0276 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c19" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.83322, 0, -0.552941, 0, 1, 0, 0.552941, 0, -0.83322, -48.6737, 0, 4.65265 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a31" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.678981, 0, -0.786763, 0, 1.1, 0, 0.865439, 0, 0.617256, -46.3383, -9.53674e-07, 3.47787 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a29" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.784226, 0, 0.701233, 0, 1.1, 0, -0.771356, 0, 0.712933, -47.6286, -9.53674e-07, -0.94886 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c22" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.32096, 0, -0.947093, 0, 1, 0, 0.947093, 0, 0.32096, -63.7185, 0.615, 3.74335 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c23" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.93075, 0, 0.365657, 0, 1, 0, -0.365657, 0, -0.93075, -68.2132, 0.466448, -0.71855 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a37" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.07886, 0, 0.19509, 0, 1.1, 0, -0.214599, 0, 0.980786, -65.896, 0.615, 4.15074 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a41" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.478685, 0, -0.900349, 0, 1.1, 0, 0.990384, 0, -0.435168, -70.3581, 0.615002, -1.09076 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a39" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.09403, 0, 0.104042, 0, 1.1, 0, -0.114447, 0, 0.994572, -52.1173, 0.615, 4.09986 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a38" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.273633, 0, -0.968566, 0, 1.1, 0, 1.06542, 0, 0.248757, -64.0348, 0.615, 5.19134 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a40" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.273633, 0, -0.968566, 0, 1.1, 0, 1.06542, 0, 0.248757, -68.0811, 0.615, 4.86059 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b26" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.903851, 0, -0.427847, 0, 1, 0, 0.427847, 0, 0.903851, -65.795, 0.615001, -0.98928 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b27" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.994236, 0, -0.470632, 0, 1.1, 0, 0.470632, 0, 0.994236, -69.8915, 0.615001, 3.83464 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="crystal_a" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.8, 0, 0, 0, 0.787235, 0.142342, 0, -0.142342, 0.787235, -41.4459, -0.0592742, -0.283378 )
+mesh = ExtResource( 19 )
+material/0 = ExtResource( 16 )
+
+[node name="crystal_a2" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.151394, -0.0720246, 0.577475, 0.0751045, 0.707695, 0.0809857, -0.575707, 0.111263, -0.141294, -41.4566, -0.173034, -0.169664 )
+mesh = ExtResource( 19 )
+material/0 = ExtResource( 16 )
+
+[node name="crystal_b" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.975657, 0.219301, 0, -0.207691, 0.924005, -0.321059, -0.0704086, 0.313244, 0.947059, -40.6496, 0, -1.41844 )
+mesh = ExtResource( 20 )
+material/0 = ExtResource( 16 )
+
+[node name="statue_a" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.95978, 0, -0.39908, 0.0749991, 1.96437, 0.368301, 0.391969, -0.37586, 1.92486, -63.3748, -3.8147e-06, -0.779352 )
+mesh = ExtResource( 21 )
+material/0 = ExtResource( 4 )
+
+[node name="bush_a" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1335, 0, 3.58056 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_a6" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.24129, 0, 2.89704 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_a2" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -18.0373, 0, 3.80724 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_a3" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.503698, 0, 0.86388, 0, 1, 0, -0.86388, 0, -0.503698, -13.4053, 0, 2.83566 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_a7" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -1.0074, 0, 1.72776, 0, 2, 0, -1.72776, 0, -1.0074, -23.1104, -4.76837e-07, 4.76852 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_a4" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.755548, 0, 1.29582, 0, 1.5, 0, -1.29582, 0, -0.755548, -26.2806, 0, -0.807298 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_a5" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( -0.503698, 0, 0.86388, 0, 1, 0, -0.86388, 0, -0.503698, -54.5957, 0, 2.90463 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -52.2902, 0, -0.367927 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b2" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.4547, 0, 3.40041 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b3" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7246, 1.90735e-06, -0.758455 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b4" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.236014, 0, -1.2784, 0, 1.3, 0, 1.2784, 0, 0.236014, 6.88954, 0, 2.64746 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_c" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4947, 0, -0.375195 )
+mesh = ExtResource( 22 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_c2" type="MeshInstance" parent="midlane_section_b"]
+transform = Transform( 0.516175, 0, 0.856483, 0, 1, 0, -0.856483, 0, 0.516175, -19.4391, 0, 4.07086 )
+mesh = ExtResource( 22 )
+material/0 = ExtResource( 16 )
+
+[node name="midlane_section_start" type="Spatial" parent="."]
+
+[node name="stairs_a" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( -1.05, 0, -4.08885e-07, 0, 1.05, 0, 4.08885e-07, 0, -1.05, 55.288, 0.034, 0 )
+mesh = ExtResource( 8 )
+material/0 = ExtResource( 4 )
+
+[node name="rock_c3" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 58.2383, 0.615, -2.27804 )
+mesh = ExtResource( 22 )
+material/0 = ExtResource( 16 )
+
+[node name="wall_a" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 55.676, 0.615, -3.472 )
+mesh = ExtResource( 26 )
+material/0 = ExtResource( 4 )
+
+[node name="wall_b" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 55.654, 0.615, 3.57 )
+mesh = ExtResource( 25 )
+material/0 = ExtResource( 4 )
+
+[node name="road_a_2" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65.476, 0.615, 0 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 1 )
+
+[node name="road_b_3" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 0 )
+mesh = ExtResource( 7 )
+material/0 = ExtResource( 1 )
+
+[node name="statue_b2" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 1.37399, 0.480761, 1.3715, -0.0832398, 1.91034, -0.586252, -1.45094, 0.345673, 1.33241, 56.5538, -0.344331, 1.32388 )
+mesh = ExtResource( 18 )
+material/0 = ExtResource( 4 )
+
+[node name="tree_a42" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( -1.1645, 0, -0.577883, 0, 1.3, 0, 0.577883, 0, -1.1645, 49.8021, 0, 3.60904 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a43" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( -0.985343, 0, -0.488978, 0, 1.1, 0, 0.488978, 0, -0.985343, 51.341, 0, -3.82195 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a45" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( -0.895766, 0, -0.444525, 0, 1, 0, 0.444525, 0, -0.895766, 58.096, 0.615, -2.60134 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a46" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 0.305446, 0, -0.95221, 0, 1, 0, 0.95221, 0, 0.305446, 58.9127, 0.615002, 2.90095 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a49" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 0.305446, 0, -0.95221, 0, 1, 0, 0.95221, 0, 0.305446, 67.5637, 0.615002, -1.95893 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a48" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( -0.40684, 0, 1.12893, 0, 1.2, 0, -1.12893, 0, -0.40684, 60.1547, 0.615004, -2.57906 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a47" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( -0.415518, 0, 0.909585, 0, 1, 0, -0.909585, 0, -0.415518, 63.8842, 0.615002, 1.58004 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a44" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 1.09453, 0, 0.109538, 0, 1.1, 0, -0.109538, 0, 1.09453, 52.891, 1.90735e-06, -2.68175 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b28" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.7874, 0, 3.65802 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b29" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 0.510002, 0, -0.860173, 0, 1, 0, 0.860173, 0, 0.510002, 62.0605, 0.615, 2.79609 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b30" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( -0.99981, 0, -0.0195113, 0, 1, 0, 0.0195113, 0, -0.99981, 60.6827, 0.615, 2.26295 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b31" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( -0.99981, 0, -0.0195113, 0, 1, 0, 0.0195113, 0, -0.99981, 65.5992, 0.615, -2.00614 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c24" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52.591, 0, 2.9231 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c25" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 62.779, 0.615, -2.517 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c26" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67.0435, 0.615, 1.56064 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="bush_a7" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 0.535783, 0, 0.844356, 0, 1, 0, -0.844356, 0, 0.535783, 59.496, 0.615, -2.02394 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_a8" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( -0.293807, 0, 0.955865, 0, 1, 0, -0.955865, 0, -0.293807, 57.2078, 0.615002, 2.39373 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_a9" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 1.29985, 0, -0.0196708, 0, 1.3, 0, 0.0196708, 0, 1.29985, 56.4529, 0.615002, 2.39373 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b5" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 0.945853, 0, 0.324594, 0, 1, 0, -0.324594, 0, 0.945853, 64.8902, 0.615, 1.08324 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b6" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 0.945853, 0, 0.324594, 0, 1, 0, -0.324594, 0, 0.945853, 56.5737, 0.614998, -2.37358 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_b3" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( -0.960745, 0, -0.277432, 0, 1, 0, 0.277432, 0, -0.960745, 64.9431, 0.615, 1.8652 )
+mesh = ExtResource( 15 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_b4" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( -0.262195, 0, -1.98274, 0, 2, 0, 1.98274, 0, -0.262195, 64.4579, 0.615, 2.48026 )
+mesh = ExtResource( 15 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_a2" type="MeshInstance" parent="midlane_section_start"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.9669, 0.615, 2.46114 )
+mesh = ExtResource( 14 )
+material/0 = ExtResource( 16 )
+
+[node name="midlane_section_end" type="Spatial" parent="."]
+
+[node name="road_a_2" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -160, 1.23, 0 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 1 )
+
+[node name="tree_c24" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( -0.93075, 0, 0.365657, 0, 1, 0, -0.365657, 0, -0.93075, -152.627, 1.23, -2.95714 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c26" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( 0.0972701, 0, -0.995258, 0, 1, 0, 0.995258, 0, 0.0972701, -160.427, 1.23, 2.34366 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c25" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( 0.158917, 0, 0.987292, 0, 1, 0, -0.987292, 0, 0.158917, -157.717, 1.23, -2.58085 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c27" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( 0.158917, 0, 0.987292, 0, 1, 0, -0.987292, 0, 0.158917, -167.779, 1.23, -3.10934 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c28" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( 0.158917, 0, 0.987292, 0, 1, 0, -0.987292, 0, 0.158917, -164.958, 1.23, 2.44029 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a42" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( -0.478685, 0, -0.900349, 0, 1.1, 0, 0.990384, 0, -0.435168, -150.804, 1.23, 2.33336 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a43" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( -1.01005, 0, -0.396058, 0, 1.1, 0, 0.435664, 0, -0.918225, -155.014, 1.23, -3.12864 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a48" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( -0.270303, 0, 0.969338, -0.00859771, 1.09996, -0.00198141, -1.06624, -0.00886967, -0.245722, -164.99, 1.23, -2.65347 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a46" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( -0.814421, 0, 0.672186, 0, 1.1, 0, -0.739404, 0, -0.740382, -156.506, 1.23, -3.68683 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a47" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( -0.814421, 0, 0.672186, 0, 1.1, 0, -0.739404, 0, -0.740382, -162.598, 1.23, 1.8777 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a45" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( -1.00649, 0, 0.403465, 0, 1.1, 0, -0.443812, 0, -0.914995, -160.217, 1.23, -2.68041 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a44" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( -1.01005, 0, -0.396058, 0, 1.1, 0, 0.435664, 0, -0.918225, -158.013, 1.23, 2.27439 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b28" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( 1.08462, 0, -0.513417, 0, 1.2, 0, 0.513417, 0, 1.08462, -153.523, 1.23, 1.99522 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b30" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( 0.19975, 0, -1.18326, 0, 1.2, 0, 1.18326, 0, 0.19975, -163.072, 1.23, -2.7704 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b29" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( 0.628163, 0, 0.903001, 0, 1.1, 0, -0.903001, 0, 0.628163, -155.532, 1.23, 2.78172 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b31" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( 0.628163, 0, 0.903001, 0, 1.1, 0, -0.903001, 0, 0.628163, -168.279, 1.23, 2.14309 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="bush_a8" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -167.032, 1.23, 2.43985 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b5" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -155.235, 1.23, 1.51287 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_c3" type="MeshInstance" parent="midlane_section_end"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -167.236, 1.23, -2.50502 )
+mesh = ExtResource( 22 )
+material/0 = ExtResource( 16 )
+
+[node name="midlane_section_loop_1" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0 )
+
+[node name="road_a_2" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -160, 1.23, 0 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 1 )
+
+[node name="tree_c24" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( -0.837675, 0, 0.329091, 0, 0.9, 0, -0.329091, 0, -0.837675, -152.906, 1.23, -2.95714 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c29" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( 0.18577, 0, 0.982594, 0, 1, 0, -0.982594, 0, 0.18577, -150.937, 1.23, -2.95714 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c26" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( 0.0972701, 0, -0.995258, 0, 1, 0, 0.995258, 0, 0.0972701, -160.427, 1.23, 2.34366 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c25" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( 0.158917, 0, 0.987292, 0, 1, 0, -0.987292, 0, 0.158917, -157.717, 1.23, -2.58085 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c27" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( 0.158917, 0, 0.987292, 0, 1, 0, -0.987292, 0, 0.158917, -167.779, 1.23, -3.10934 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c28" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( 0.158917, 0, 0.987292, 0, 1, 0, -0.987292, 0, 0.158917, -164.958, 1.23, 2.44029 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a43" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( -1.01005, 0, -0.396058, 0, 1.1, 0, 0.435664, 0, -0.918225, -155.014, 1.23, -3.12864 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a49" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( -1.09846, 0, -0.0528938, 0, 1.1, 0, 0.058183, 0, -0.9986, -151.265, 1.23, 1.71709 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a48" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( -0.270303, 0, 0.969338, -0.00859771, 1.09996, -0.00198141, -1.06624, -0.00886967, -0.245722, -164.99, 1.23, -2.65347 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a46" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( -0.814421, 0, 0.672186, 0, 1.1, 0, -0.739404, 0, -0.740382, -156.506, 1.23, -3.68683 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a47" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( -0.814421, 0, 0.672186, 0, 1.1, 0, -0.739404, 0, -0.740382, -162.598, 1.23, 1.8777 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a45" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( -1.00649, 0, 0.403465, 0, 1.1, 0, -0.443812, 0, -0.914995, -160.217, 1.23, -2.68041 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a44" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( -1.01005, 0, -0.396058, 0, 1.1, 0, 0.435664, 0, -0.918225, -158.013, 1.23, 2.27439 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b28" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( 1.08462, 0, -0.513417, 0, 1.2, 0, 0.513417, 0, 1.08462, -153.523, 1.23, 1.99522 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b30" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( 0.19975, 0, -1.18326, 0, 1.2, 0, 1.18326, 0, 0.19975, -163.072, 1.23, -2.7704 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b29" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( 0.628163, 0, 0.903001, 0, 1.1, 0, -0.903001, 0, 0.628163, -155.532, 1.23, 2.78172 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b31" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( 0.628163, 0, 0.903001, 0, 1.1, 0, -0.903001, 0, 0.628163, -168.279, 1.23, 2.14309 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="bush_a8" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -167.032, 1.23, 2.43985 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b5" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -155.235, 1.23, 1.51287 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_c3" type="MeshInstance" parent="midlane_section_loop_1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -167.236, 1.23, -2.50502 )
+mesh = ExtResource( 22 )
+material/0 = ExtResource( 16 )
+
+[node name="midlane_section_loop_2" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 0 )
+
+[node name="road_a_2" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -160, 1.23, 0 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 1 )
+
+[node name="tree_c24" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( -0.837675, 0, 0.329091, 0, 0.9, 0, -0.329091, 0, -0.837675, -152.906, 1.23, -2.95714 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c29" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( 0.18577, 0, 0.982594, 0, 1, 0, -0.982594, 0, 0.18577, -150.937, 1.23, -2.95714 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c26" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( 0.0972701, 0, -0.995258, 0, 1, 0, 0.995258, 0, 0.0972701, -160.427, 1.23, 2.34366 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c25" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( 0.158917, 0, 0.987292, 0, 1, 0, -0.987292, 0, 0.158917, -157.717, 1.23, -2.58085 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c27" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( 0.158917, 0, 0.987292, 0, 1, 0, -0.987292, 0, 0.158917, -167.779, 1.23, -3.10934 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c28" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( 0.158917, 0, 0.987292, 0, 1, 0, -0.987292, 0, 0.158917, -164.958, 1.23, 2.44029 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a43" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( -1.01005, 0, -0.396058, 0, 1.1, 0, 0.435664, 0, -0.918225, -155.014, 1.23, -3.12864 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a49" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( -1.09846, 0, -0.0528938, 0, 1.1, 0, 0.058183, 0, -0.9986, -151.265, 1.23, 1.71709 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a48" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( -0.270303, 0, 0.969338, -0.00859771, 1.09996, -0.00198141, -1.06624, -0.00886967, -0.245722, -164.99, 1.23, -2.65347 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a46" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( -0.814421, 0, 0.672186, 0, 1.1, 0, -0.739404, 0, -0.740382, -156.506, 1.23, -3.68683 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a47" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( -0.814421, 0, 0.672186, 0, 1.1, 0, -0.739404, 0, -0.740382, -162.598, 1.23, 1.8777 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a45" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( -1.00649, 0, 0.403465, 0, 1.1, 0, -0.443812, 0, -0.914995, -160.217, 1.23, -2.68041 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a44" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( -1.01005, 0, -0.396058, 0, 1.1, 0, 0.435664, 0, -0.918225, -158.013, 1.23, 2.27439 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b28" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( 1.08462, 0, -0.513417, 0, 1.2, 0, 0.513417, 0, 1.08462, -153.523, 1.23, 1.99522 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b30" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( 0.19975, 0, -1.18326, 0, 1.2, 0, 1.18326, 0, 0.19975, -163.072, 1.23, -2.7704 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b29" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( 0.628163, 0, 0.903001, 0, 1.1, 0, -0.903001, 0, 0.628163, -155.532, 1.23, 2.78172 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b31" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( 0.628163, 0, 0.903001, 0, 1.1, 0, -0.903001, 0, 0.628163, -168.279, 1.23, 2.14309 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="bush_a8" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -167.032, 1.23, 2.43985 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b5" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -155.235, 1.23, 1.51287 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_c3" type="MeshInstance" parent="midlane_section_loop_2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -167.236, 1.23, -2.50502 )
+mesh = ExtResource( 22 )
+material/0 = ExtResource( 16 )
+
+[node name="midlane_section_loop_3" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 0, 0 )
+
+[node name="road_a_2" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -160, 1.23, 0 )
+mesh = ExtResource( 10 )
+material/0 = ExtResource( 1 )
+
+[node name="tree_c24" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( -0.837675, 0, 0.329091, 0, 0.9, 0, -0.329091, 0, -0.837675, -152.906, 1.23, -2.95714 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c29" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( 0.18577, 0, 0.982594, 0, 1, 0, -0.982594, 0, 0.18577, -150.937, 1.23, -2.95714 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c26" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( 0.0972701, 0, -0.995258, 0, 1, 0, 0.995258, 0, 0.0972701, -160.427, 1.23, 2.34366 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c25" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( 0.158917, 0, 0.987292, 0, 1, 0, -0.987292, 0, 0.158917, -157.717, 1.23, -2.58085 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c27" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( 0.158917, 0, 0.987292, 0, 1, 0, -0.987292, 0, 0.158917, -167.779, 1.23, -3.10934 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_c28" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( 0.158917, 0, 0.987292, 0, 1, 0, -0.987292, 0, 0.158917, -164.958, 1.23, 2.44029 )
+mesh = ExtResource( 6 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a43" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( -1.01005, 0, -0.396058, 0, 1.1, 0, 0.435664, 0, -0.918225, -155.014, 1.23, -3.12864 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a49" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( -1.09846, 0, -0.0528938, 0, 1.1, 0, 0.058183, 0, -0.9986, -151.265, 1.23, 1.71709 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a48" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( -0.270303, 0, 0.969338, -0.00859771, 1.09996, -0.00198141, -1.06624, -0.00886967, -0.245722, -164.99, 1.23, -2.65347 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a46" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( -0.814421, 0, 0.672186, 0, 1.1, 0, -0.739404, 0, -0.740382, -156.506, 1.23, -3.68683 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a47" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( -0.814421, 0, 0.672186, 0, 1.1, 0, -0.739404, 0, -0.740382, -162.598, 1.23, 1.8777 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a45" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( -1.00649, 0, 0.403465, 0, 1.1, 0, -0.443812, 0, -0.914995, -160.217, 1.23, -2.68041 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_a44" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( -1.01005, 0, -0.396058, 0, 1.1, 0, 0.435664, 0, -0.918225, -158.013, 1.23, 2.27439 )
+mesh = ExtResource( 13 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b28" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( 1.08462, 0, -0.513417, 0, 1.2, 0, 0.513417, 0, 1.08462, -153.523, 1.23, 1.99522 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b30" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( 0.19975, 0, -1.18326, 0, 1.2, 0, 1.18326, 0, 0.19975, -163.072, 1.23, -2.7704 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b29" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( 0.628163, 0, 0.903001, 0, 1.1, 0, -0.903001, 0, 0.628163, -155.532, 1.23, 2.78172 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="tree_b31" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( 0.628163, 0, 0.903001, 0, 1.1, 0, -0.903001, 0, 0.628163, -168.279, 1.23, 2.14309 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 3 )
+
+[node name="bush_a8" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -167.032, 1.23, 2.43985 )
+mesh = ExtResource( 23 )
+material/0 = ExtResource( 16 )
+
+[node name="bush_b5" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -155.235, 1.23, 1.51287 )
+mesh = ExtResource( 24 )
+material/0 = ExtResource( 16 )
+
+[node name="rock_c3" type="MeshInstance" parent="midlane_section_loop_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -167.236, 1.23, -2.50502 )
+mesh = ExtResource( 22 )
+material/0 = ExtResource( 16 )

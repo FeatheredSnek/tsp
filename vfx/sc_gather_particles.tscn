@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://vfx/yuge_smoke.png" type="Texture" id=1]
+[ext_resource path="res://vfx/wr_gather_particles.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.632432, 1 )
+colors = PoolColorArray( 0.392157, 0.772549, 1, 0, 1, 1, 1, 1, 0.694118, 0.827451, 1, 0.364706 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 32
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.285156 ), -1.21212, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+width = 32
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 96.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = -5.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = -40.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[node name="sc_gather_particles" type="Particles2D"]
+modulate = Color( 1, 1, 1, 0.607843 )
+scale = Vector2( 2, 2 )
+amount = 16
+lifetime = 2.2
+one_shot = true
+speed_scale = 1.2
+explosiveness = 0.8
+fract_delta = false
+process_material = SubResource( 5 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

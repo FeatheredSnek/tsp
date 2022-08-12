@@ -1,0 +1,12 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[ext_resource path="res://ui/fonts/Poppins-Regular.otf" type="DynamicFontData" id=1]
+
+[resource]
+size = 40
+outline_size = 1
+outline_color = Color( 0.701961, 0.968627, 0.67451, 0.270588 )
+use_filter = true
+extra_spacing_bottom = -14
+extra_spacing_char = 3
+font_data = ExtResource( 1 )

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://entities/player/shadowrealm_particle_pink.png" type="Texture" id=1]
+[ext_resource path="res://vfx/particles_ui_explode.tres" type="Material" id=2]
+[ext_resource path="res://vfx/ui_explode_heart.gd" type="Script" id=3]
+
+[node name="ui_explode" type="Particles2D"]
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 0.96
+process_material = ExtResource( 2 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )

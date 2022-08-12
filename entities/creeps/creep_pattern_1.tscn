@@ -1,0 +1,158 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://entities/creeps/creep_pattern_1.gd" type="Script" id=1]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -33.21, -28.2105, -34.5494, -28.6687, 34.5494, 28.6687, 28.8318, 72.7794, -45.5759, -18.3774, 45.5759, 18.3774, 139.831, 139.673, -80.8604, -9.55623, 80.8604, 9.55623, 380.207, 197.01, 0, 0, 0, 0, 657.338, 218.328 )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 633.21, -28.2105, 34.5494, -28.6687, -34.5494, 28.6687, 571.168, 72.7794, 45.5759, -18.3774, -45.5759, 18.3774, 460.169, 139.673, 80.8604, -9.55623, -80.8604, 9.55623, 219.793, 197.01, 0, 0, 0, 0, -57.338, 218.328 )
+}
+
+[node name="creep_pattern_1" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 720.0 ],
+"_edit_vertical_guides_": [ 600.0 ]
+}
+
+[node name="spawnpoint_1_1" type="Position2D" parent="."]
+position = Vector2( 150, -50 )
+
+[node name="spawnpoint_1_2" type="Position2D" parent="."]
+position = Vector2( 450, -50 )
+
+[node name="spawnpoint_1_3" type="Position2D" parent="."]
+position = Vector2( 375, -50 )
+
+[node name="spawnpoint_1_4" type="Position2D" parent="."]
+position = Vector2( 215, -50 )
+
+[node name="midpoint_1_1" type="Position2D" parent="."]
+position = Vector2( 150, 134 )
+
+[node name="midpoint_1_2" type="Position2D" parent="."]
+position = Vector2( 450, 134 )
+
+[node name="midpoint_1_3" type="Position2D" parent="."]
+position = Vector2( 375, 240 )
+
+[node name="midpoint_1_4" type="Position2D" parent="."]
+position = Vector2( 215, 240 )
+
+[node name="target_1_1" type="Position2D" parent="."]
+position = Vector2( -140, 442.958 )
+
+[node name="target_1_2" type="Position2D" parent="."]
+position = Vector2( 740, 442.958 )
+
+[node name="target_1_3" type="Position2D" parent="."]
+position = Vector2( 740, 500 )
+
+[node name="target_1_4" type="Position2D" parent="."]
+position = Vector2( -140, 500 )
+
+[node name="path_2_1a" type="Path2D" parent="."]
+visible = false
+position = Vector2( 0, -0.568802 )
+curve = SubResource( 1 )
+
+[node name="path_2_1b" type="Path2D" parent="."]
+visible = false
+curve = SubResource( 2 )
+
+[node name="debug rect" type="ColorRect" parent="."]
+margin_left = 600.0
+margin_right = 610.0
+margin_bottom = 750.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="spawnpoint_exploder_1" type="Position2D" parent="."]
+position = Vector2( 130, -30 )
+
+[node name="spawnpoint_exploder_2" type="Position2D" parent="."]
+position = Vector2( 470, -30 )
+
+[node name="spawnpoint_exploder_3" type="Position2D" parent="."]
+position = Vector2( 100, -30 )
+
+[node name="spawnpoint_exploder_4" type="Position2D" parent="."]
+position = Vector2( 200, -30 )
+
+[node name="spawnpoint_exploder_5" type="Position2D" parent="."]
+position = Vector2( 400, -30 )
+
+[node name="spawnpoint_exploder_6" type="Position2D" parent="."]
+position = Vector2( 500, -30 )
+
+[node name="spawnpoint_exploder_7" type="Position2D" parent="."]
+position = Vector2( 100, -30 )
+
+[node name="spawnpoint_exploder_8" type="Position2D" parent="."]
+position = Vector2( 180, -30 )
+
+[node name="spawnpoint_exploder_9" type="Position2D" parent="."]
+position = Vector2( 260, -30 )
+
+[node name="spawnpoint_exploder_10" type="Position2D" parent="."]
+position = Vector2( 340, -30 )
+
+[node name="spawnpoint_exploder_11" type="Position2D" parent="."]
+position = Vector2( 420, -30 )
+
+[node name="spawnpoint_exploder_12" type="Position2D" parent="."]
+position = Vector2( 500, -30 )
+
+[node name="spawnpoint_side_left_1" type="Position2D" parent="."]
+position = Vector2( -50, 96 )
+
+[node name="spawnpoint_side_left_2" type="Position2D" parent="."]
+position = Vector2( -50, 176 )
+
+[node name="spawnpoint_side_left_3" type="Position2D" parent="."]
+position = Vector2( -50, 256 )
+
+[node name="spawnpoint_side_right_1" type="Position2D" parent="."]
+position = Vector2( 650, 96 )
+
+[node name="spawnpoint_side_right_2" type="Position2D" parent="."]
+position = Vector2( 650, 176 )
+
+[node name="spawnpoint_side_right_3" type="Position2D" parent="."]
+position = Vector2( 650, 256 )
+
+[node name="spawnpoint_supercreep_1" type="Position2D" parent="."]
+position = Vector2( 300, -50 )
+
+[node name="target_supercreep_1" type="Position2D" parent="."]
+position = Vector2( 300, 176 )
+
+[node name="spawnpoint_group_march_left" type="Position2D" parent="."]
+position = Vector2( -100, 210 )
+
+[node name="target_group_march_left" type="Position2D" parent="."]
+position = Vector2( 700, 620 )
+
+[node name="spawnpoint_group_march_right" type="Position2D" parent="."]
+position = Vector2( 700, 210 )
+
+[node name="target_group_march_right" type="Position2D" parent="."]
+position = Vector2( -100, 620 )
+
+[node name="testlabel" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="await_timer" type="Timer" parent="."]
+
+[node name="pattern_timer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
